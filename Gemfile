@@ -18,6 +18,13 @@ gem 'uglifier', '>= 1.3.0'
 # Management ENV variables
 gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
 
+# Authentication
+gem 'devise', '~> 4.9', '>= 4.9.3'
+
+# Admin
+gem 'trestle', '~> 0.9.8'
+gem 'trestle-auth', '~> 0.4.4'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
