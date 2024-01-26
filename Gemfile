@@ -28,6 +28,11 @@ gem 'trestle-auth', '~> 0.4.4'
 # Internationalize
 gem 'rails-i18n', '~> 5.1', '>= 5.1.1'
 
+# Upload file
+gem 'carrierwave', '~> 2.2', '>= 2.2.3'
+gem 'carrierwave-i18n', '< 3'
+gem 'image_processing', '~> 1.12', '>= 1.12.2'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end

@@ -32,6 +32,10 @@ class DeviseCreateAdministrators < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      # Add custom attributes
+      t.string :avatar
+      t.string :full_name
+
 
       t.timestamps null: false
     end

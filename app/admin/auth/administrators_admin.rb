@@ -1,7 +1,7 @@
 Trestle.resource(:administrators, model: Administrator, scope: Auth) do
   menu do
     group :configuration, priority: :last do
-      item :administrators, icon: "fas fa-users"
+      item :administrators, icon: 'fa fa-star', label: t('trestle.labels.administrators')
     end
   end
 
@@ -9,18 +9,31 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
     column :avatar, header: false do |administrator|
       avatar_for(administrator)
     end
+
     column :email, link: true
+
+    column :full_name
+
     actions do |a|
       a.delete unless a.instance == current_user
+      a.edit if a.instance == current_user
     end
   end
 
-  form do |administrator|
-    text_field :email
+  form do
+    tab :general_info, label: t('trestle.tabs.general_info') do
+      row do
+        col(sm: 6) { text_field :email }
+        col(sm: 6) { password_field :password }
+      end
 
-    row do
-      col(sm: 6) { password_field :password }
-      col(sm: 6) { password_field :password_confirmation }
+      row do
+        col(sm: 6) { text_field :full_name }
+        col(sm: 6) { file_field :avatar }
+      end
+    end
+
+    tab :role_info, label: t('trestle.tabs.role_info') do
     end
   end
 

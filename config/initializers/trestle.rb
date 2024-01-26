@@ -158,11 +158,15 @@ Trestle.configure do |config|
   # Customize the rendering of user avatars. Can be disabled by setting to false.
   # Defaults to the Gravatar based on the user's email address.
   #
-  # config.auth.avatar = ->(user) {
-  #   avatar(fallback: user.initials) do
-  #     image_tag(user.avatar_url, alt: user.name) if user.avatar_url?
-  #   end
-  # }
+  config.auth.avatar = ->(user) {
+    if user.avatar.present?
+      image_tag(user.avatar.url, alt: user.full_name,
+                id: 'avatar',
+                data: { behavior: 'zoom' },
+                loading: 'lazy')
+    end
+  }
+
 
   # Customize the rendering of the current user's name in the main header.
   # Defaults to the user's #first_name and #last_name (last name in bold),

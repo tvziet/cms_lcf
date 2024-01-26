@@ -1,1 +1,37 @@
 vi:
+  activerecord:
+    models:
+      administrator: 'Quản trị viên'
+      employee: 'Nhân viên'
+      role: 'Quyền'
+    attributes:
+      administrator:
+        avatar: 'Hình đại diện'
+        full_name: 'Họ và tên'
+        password: 'Mật khẩu'
+        role_ids: 'Quyền'
+      employee:
+        password: 'Mật khẩu'
+      role:
+        name: 'Tên'
+        created_at: 'Được tạo lúc'
+        updated_at: 'Được cập nhật lúc'
+  errors:
+    messages:
+      carrierwave_processing_error: 'không xử lý được'
+      carrierwave_integrity_error: 'không phải là kiểu file hợp lệ'
+      carrierwave_download_error: 'không thể download'
+      extension_allowlist_error: "Bạn không thể tải file có định dạng %{extension}, chỉ cho phép tải file có định dạng: %{allowed_types}"
+      extension_denylist_error: "Bạn không thể tải file có định dạng %{extension}, không cho phép tải file có định dạng: %{prohibited_types}"
+      content_type_allowlist_error: "Bạn không thể file có định dạng %{content_type}"
+      content_type_denylist_error: "Bạn không thể file có định dạng %{content_type}"
+      processing_error: "Không thể xử lý, có thể file của bạn không phải hình ảnh?"
+      min_size_error: "Kích thước file phải lớn hơn %{min_size}"
+      max_size_error: "Kích thước file phải nhỏ hơn %{max_size}"
+  trestle:
+    tabs:
+      general_info: 'Thông tin chung'
+      role_info: 'Thông tin quyền'
+    labels:
+      administrators: 'Quản trị viên'
+      employees: 'Nhân viên'
