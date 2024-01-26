@@ -25,6 +25,9 @@ gem 'devise', '~> 4.9', '>= 4.9.3'
 gem 'trestle', '~> 0.9.8'
 gem 'trestle-auth', '~> 0.4.4'
 
+# Internationalize
+gem 'rails-i18n', '~> 5.1', '>= 5.1.1'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
