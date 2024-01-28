@@ -13,3 +13,12 @@ Employee.create!(email: 'user1@example.com', password: '123123', full_name: 'Use
                  info_contract: 1,
                  working_status: 1,
                  job_title: 'Nhân viên kế toán')
+
+Group.delete_all
+Company.delete_all
+
+company_1 = Company.create(name: 'LC Foods')
+company_2 = Company.create(name: 'KMS Vina')
+
+Group.create(name: 'Nhân sự', company_id: company_1.id)
+Group.create(name: 'Nhân sự', company_id: company_2.id)
