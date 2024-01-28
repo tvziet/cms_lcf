@@ -69,6 +69,14 @@ Trestle.resource(:employees) do
         col(sm: 6) { select(:working_status, Employee.values(:working_statuses)) }
         col(sm: 6) { text_field :job_title }
       end
+      row do
+        col(sm: 6) {
+          select(:company_id, Company.all.map { |company| [company.name, company.id] }.unshift([nil, nil]), {}, id: 'company_select', selected: employee.company_id )
+        }
+        col(sm: 6) {
+          select(:group_id, Group.where(company_id: employee.company_id).map { |group| [group.name, group.id] }, {}, id: 'group_select', selected: employee.group_id )
+        }
+      end
 
       row do
         col(sm: 12) { editor :info_contract }
@@ -91,6 +99,7 @@ Trestle.resource(:employees) do
                                      :full_name, :gender,
                                      :address, :native_place,
                                      :tax_code, :social_insurance_number,
-                                     :avatar)
+                                     :avatar,
+                                     :company_id, :group_id)
   end
 end

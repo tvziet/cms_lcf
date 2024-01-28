@@ -11,7 +11,7 @@
 #  encrypted_password      :string           default(""), not null
 #  full_name               :string
 #  gender                  :integer          default("unknown")
-#  info_contract           :integer          default(1)
+#  info_contract           :text
 #  job_title               :string
 #  native_place            :string
 #  remember_created_at     :datetime
@@ -22,6 +22,8 @@
 #  working_status          :integer          default("active")
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  company_id              :integer
+#  group_id                :integer
 #
 # Indexes
 #
@@ -38,6 +40,12 @@ class Employee < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   mount_uploader :avatar, AvatarUploader
+
+  #rela
+  belongs_to :company
+  belongs_to :group
+
+  # accepts_nested_attributes_for :company, :group
 
   enum gender: { female: 0, male: 1, unknown: 2 }
   enum working_status: { inactive: 0, active: 1 }

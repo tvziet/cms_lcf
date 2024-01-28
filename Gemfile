@@ -42,6 +42,9 @@ group :development do
   # Add a comment summarizing the current schema
   gem 'annotate', '~> 3.2'
 
+  #debug
+  gem 'pry'
+
   # Prevent N+1 queries
   gem 'bullet', '~> 7.1', '>= 7.1.6'
 

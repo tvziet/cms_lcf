@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_28_133736) do
+ActiveRecord::Schema.define(version: 2024_01_28_141147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,11 +50,13 @@ ActiveRecord::Schema.define(version: 2024_01_28_133736) do
     t.integer "age"
     t.string "tax_code"
     t.string "social_insurance_number"
-    t.integer "info_contract", default: 1
+    t.text "info_contract"
     t.integer "working_status", default: 1
     t.string "job_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "company_id"
+    t.integer "group_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
