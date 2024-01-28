@@ -2,6 +2,7 @@ vi:
   activerecord:
     models:
       administrator: 'Quản trị viên'
+      company: 'Công ty'
       employee: 'Nhân viên'
       role: 'Quyền'
     attributes:
@@ -10,6 +11,10 @@ vi:
         full_name: 'Họ và tên'
         password: 'Mật khẩu'
         role_ids: 'Quyền'
+      company:
+        created_at: 'Được tạo lúc'
+        name: 'Tên'
+        updated_at: 'Được cập nhật lúc'
       employee:
         address: 'Địa chỉ'
         age: 'Tuổi'
@@ -59,6 +64,7 @@ vi:
       work_info: 'Thông tin công việc'
     labels:
       administrators: 'Quản trị viên'
+      companies: 'Công ty'
       employees: 'Nhân viên'
   admin:
     titles:

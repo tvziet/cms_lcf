@@ -11,7 +11,7 @@
 #  encrypted_password      :string           default(""), not null
 #  full_name               :string
 #  gender                  :integer          default("unknown")
-#  info_contract           :integer          default("fixed_term")
+#  info_contract           :integer          default(1)
 #  job_title               :string
 #  native_place            :string
 #  remember_created_at     :datetime
