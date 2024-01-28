@@ -1,35 +1,96 @@
 Trestle.resource(:employees) do
   menu do
-    item :employees, icon: "fa fa-star"
+    item :employees, icon: 'fas fa-users', label: t('trestle.labels.employees')
   end
 
-  # Customize the table columns shown on the index view.
-  #
-  # table do
-  #   column :name
-  #   column :created_at, align: :center
-  #   actions
-  # end
+  # Ignore the password parameters if they are blank
+  update_instance do |instance, attrs|
+    attrs.delete(:password) if attrs[:password].blank?
+    instance.assign_attributes(attrs)
+  end
 
-  # Customize the form fields shown on the new/edit views.
-  #
-  # form do |employee|
-  #   text_field :name
-  #
-  #   row do
-  #     col { datetime_field :updated_at }
-  #     col { datetime_field :created_at }
-  #   end
-  # end
+  table do
+    column :id
+    column :email
+    column :full_name
+    column :avatar, align: :center do |employee|
+      employee.has_avatar? ? image_tag(employee.avatar.url,
+                                       id: 'avatar',
+                                       loading: 'lazy') : image_tag('fallback/default.png',
+                                                                    id: 'avatar',
+                                                                    loading: 'lazy')
+    end
+    column :age
+    column :gender do |employee|
+      employee.value(:genders, employee.gender)
+    end
+    column :address
+    column :native_place
+    column :tax_code
+    column :social_insurance_number
+    column :created_at, align: :center do |employee|
+      employee.created_at.strftime('%d/%m/%Y')
+    end
+    column :updated_at, align: :center do |employee|
+      employee.updated_at.strftime('%d/%m/%Y')
+    end
+    actions
+  end
 
-  # By default, all parameters passed to the update and create actions will be
-  # permitted. If you do not have full trust in your users, you should explicitly
-  # define the list of permitted parameters.
-  #
-  # For further information, see the Rails documentation on Strong Parameters:
-  #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
-  #
-  # params do |params|
-  #   params.require(:employee).permit(:name, ...)
-  # end
+  form do |employee|
+    tab :personal_info, label: t('trestle.tabs.personal_info') do
+      row do
+        col(sm: 6) { email_field :email }
+        col(sm: 6) { password_field :password }
+      end
+
+      row do
+        col(sm: 6) { text_field :full_name }
+        col(sm: 6) { select(:gender, Employee.values(:genders)) }
+      end
+
+      row do
+        col(sm: 6) { text_field :address }
+        col(sm: 6) { text_field :native_place }
+      end
+
+      row do
+        col(sm: 6) { text_field :tax_code }
+        col(sm: 6) { text_field :social_insurance_number }
+      end
+
+      row do
+        col(sm: 12) { file_field :avatar }
+      end
+    end
+
+    tab :work_info, label: t('trestle.tabs.work_info') do
+      row do
+        col(sm: 6) { select(:working_status, Employee.values(:working_statuses)) }
+        col(sm: 6) { text_field :job_title }
+      end
+
+      row do
+        col(sm: 12) { editor :info_contract }
+      end
+    end
+
+    sidebar do
+      form_group :avatar, label: false do
+        if employee.has_avatar?
+          link_to image_tag(employee.avatar.url(:thumb)), employee.avatar_url, data: { behavior: 'zoom' }
+        else
+          image_tag('fallback/default.png', id: 'employee_default_avatar', loading: 'lazy')
+        end
+      end
+    end
+  end
+
+  params do |params|
+    params.require(:employee).permit(:email, :password,
+                                     :full_name, :gender,
+                                     :address, :native_place,
+                                     :tax_code, :social_insurance_number,
+                                     :avatar)
+  end
 end

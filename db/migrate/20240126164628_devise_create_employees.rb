@@ -32,6 +32,19 @@ class DeviseCreateEmployees < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      # Custom
+      t.string :avatar
+      t.string :full_name
+      t.date :dob
+      t.integer :gender, default: 2
+      t.string :address
+      t.string :native_place
+      t.integer :age
+      t.string :tax_code
+      t.string :social_insurance_number
+      t.text :info_contract
+      t.integer :working_status, default: 1
+      t.string :job_title
 
       t.timestamps null: false
     end

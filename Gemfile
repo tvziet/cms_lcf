@@ -24,6 +24,7 @@ gem 'devise', '~> 4.9', '>= 4.9.3'
 # Admin
 gem 'trestle', '~> 0.9.8'
 gem 'trestle-auth', '~> 0.4.4'
+gem 'trestle-tinymce', '~> 0.3.1'
 
 # Internationalize
 gem 'rails-i18n', '~> 5.1', '>= 5.1.1'

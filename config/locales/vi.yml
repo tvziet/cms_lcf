@@ -11,11 +11,34 @@ vi:
         password: 'Mật khẩu'
         role_ids: 'Quyền'
       employee:
+        address: 'Địa chỉ'
+        age: 'Tuổi'
+        avatar: 'Hình đại diện'
+        created_at: 'Được tạo lúc'
+        dob: 'Ngày sinh'
+        full_name: 'Họ và tên'
+        gender: 'Giới tính'
+        info_contract: 'Thông tin hợp đồng'
+        job_title: 'Vị trí'
+        native_place: 'Quê quán'
         password: 'Mật khẩu'
+        social_insurance_number: 'Mã BHXH'
+        tax_code: 'Mã số thuế'
+        updated_at: 'Được cập nhật lúc'
+        working_status: 'Trạng thái làm việc'
       role:
         name: 'Tên'
         created_at: 'Được tạo lúc'
         updated_at: 'Được cập nhật lúc'
+    enums:
+      employee:
+        genders:
+          female: 'Nữ'
+          male: 'Nam'
+          unknown: 'Không xác định'
+        working_statuses:
+          inactive: 'Đã nghỉ'
+          active: 'Đang làm'
   errors:
     messages:
       carrierwave_processing_error: 'không xử lý được'
@@ -31,7 +54,12 @@ vi:
   trestle:
     tabs:
       general_info: 'Thông tin chung'
+      personal_info: 'Thông tin cá nhân'
       role_info: 'Thông tin quyền'
+      work_info: 'Thông tin công việc'
     labels:
       administrators: 'Quản trị viên'
       employees: 'Nhân viên'
+  admin:
+    titles:
+      edit: "Chỉnh sửa %{model_name}"
