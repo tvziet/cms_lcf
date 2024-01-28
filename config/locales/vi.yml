@@ -4,6 +4,7 @@ vi:
       administrator: 'Quản trị viên'
       company: 'Công ty'
       employee: 'Nhân viên'
+      group: 'Phòng ban'
       role: 'Quyền'
     attributes:
       administrator:
@@ -31,6 +32,11 @@ vi:
         tax_code: 'Mã số thuế'
         updated_at: 'Được cập nhật lúc'
         working_status: 'Trạng thái làm việc'
+      group:
+        name: 'Tên'
+        company_id: 'Công ty'
+        created_at: 'Được tạo lúc'
+        updated_at: 'Được cập nhật lúc'
       role:
         name: 'Tên'
         created_at: 'Được tạo lúc'
@@ -66,6 +72,7 @@ vi:
       administrators: 'Quản trị viên'
       companies: 'Công ty'
       employees: 'Nhân viên'
+      groups: 'Phòng ban'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"
