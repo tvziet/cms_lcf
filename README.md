@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+```bash
+cp .env.example .env
+```
 
-* Ruby version
+Update ENV variables, then run commands:
 
-* System dependencies
+```bash
+rails db:create
+```
 
-* Configuration
+```bash
+rails db:migrate
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+rails db:seed
+```
