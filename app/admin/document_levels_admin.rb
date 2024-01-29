@@ -19,6 +19,6 @@ Trestle.resource(:document_levels) do
   end
 
   params do |params|
-    params.require(:document_level).permit(:name)
+    params.require(:document_level).permit(:name, :document_id)
   end
 end

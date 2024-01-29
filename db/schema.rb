@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_28_152837) do
+ActiveRecord::Schema.define(version: 2024_01_29_131492) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(version: 2024_01_28_152837) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "document_level_id"
+    t.integer "company_id"
+    t.text "group_ids", default: [], array: true
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_level_id"], name: "index_documents_on_document_level_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,7 +68,7 @@ ActiveRecord::Schema.define(version: 2024_01_28_152837) do
     t.integer "age"
     t.string "tax_code"
     t.string "social_insurance_number"
-    t.integer "info_contract", default: 1
+    t.text "info_contract"
     t.integer "working_status", default: 1
     t.string "job_title"
     t.datetime "created_at", null: false
@@ -73,5 +85,6 @@ ActiveRecord::Schema.define(version: 2024_01_28_152837) do
     t.index ["company_id"], name: "index_groups_on_company_id"
   end
 
+  add_foreign_key "documents", "document_levels"
   add_foreign_key "groups", "companies"
 end

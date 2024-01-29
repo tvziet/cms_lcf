@@ -8,4 +8,5 @@
 #  updated_at :datetime         not null
 #
 class DocumentLevel < ApplicationRecord
+  has_many :documents
 end
