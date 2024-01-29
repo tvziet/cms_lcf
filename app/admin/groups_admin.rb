@@ -3,6 +3,11 @@ Trestle.resource(:groups) do
     item :groups, icon: 'fa fa-briefcase', label: t('trestle.labels.groups')
   end
 
+  collection do
+    model.includes(:company)
+  end
+
+
   table do
     column :name
     column :company_id, align: :center do |group|
