@@ -3,6 +3,7 @@ vi:
     models:
       administrator: 'Quản trị viên'
       company: 'Công ty'
+      document_level: 'Cấp tài liệu'
       employee: 'Nhân viên'
       group: 'Phòng ban'
       role: 'Quyền'
@@ -13,6 +14,10 @@ vi:
         password: 'Mật khẩu'
         role_ids: 'Quyền'
       company:
+        created_at: 'Được tạo lúc'
+        name: 'Tên'
+        updated_at: 'Được cập nhật lúc'
+      document_level:
         created_at: 'Được tạo lúc'
         name: 'Tên'
         updated_at: 'Được cập nhật lúc'
@@ -71,6 +76,7 @@ vi:
     labels:
       administrators: 'Quản trị viên'
       companies: 'Công ty'
+      document_levels: 'Cấp tài liệu'
       employees: 'Nhân viên'
       groups: 'Phòng ban'
   admin:
