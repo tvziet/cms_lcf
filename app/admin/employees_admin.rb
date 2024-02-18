@@ -9,6 +9,25 @@ Trestle.resource(:employees) do
     instance.assign_attributes(attrs)
   end
 
+  controller do
+    def groups_for_company
+      company = Company.find(params[:company_id])
+      groups = company.groups
+
+      render json: groups.map { |group| { id: group.id, name: group.name } }
+    end
+
+    def companies
+      companies = Company.all
+      render json: companies.map { |company| { id: company.id, name: company.name } }
+    end
+
+    def groups
+      groups = Group.all
+      render json: groups.map { |group| { id: group.id, name: group.name } }
+    end
+  end
+
   table do
     column :id
     column :email
@@ -70,11 +89,23 @@ Trestle.resource(:employees) do
         col(sm: 6) { text_field :job_title }
       end
       row do
-        col(sm: 6) {
-          select(:company_id, Company.all.map { |company| [company.name, company.id] }.unshift([nil, nil]), {}, id: 'company_select', selected: employee.company_id )
+        col(sm: 4) {
+          content_tag :div, id: 'companies' do
+            fields_for :company_employees, (employee.company_employees.any? ? employee.company_employees : employee.company_employees.build) do |company_employee|
+              company_employee.select :company_id, Company.all.map { |company| [company.name, company.id] }, selected: company_employee.object.company_id
+            end
+          end
         }
-        col(sm: 6) {
-          select(:group_id, Group.where(company_id: employee.company_id).map { |group| [group.name, group.id] }, {}, id: 'group_select', selected: employee.group_id )
+
+        col(sm: 4) {
+          content_tag :div, id: 'groups' do
+            fields_for :group_employees, (employee.group_employees.any? ? employee.group_employees : employee.group_employees.build) do |group_employee|
+              group_employee.select :group_id, Group.all.map { |group| [group.name, group.id] }, selected: group_employee.object.group_id
+            end
+          end
+        }
+        col(sm: 4) {
+          link_to 'Add Company and Group', '#', id: 'add_company_and_group'
         }
       end
 
@@ -96,10 +127,20 @@ Trestle.resource(:employees) do
 
   params do |params|
     params.require(:employee).permit(:email, :password,
-                                     :full_name, :gender,
-                                     :address, :native_place,
-                                     :tax_code, :social_insurance_number,
-                                     :avatar,
-                                     :company_id, :group_id)
+                                    :full_name, :gender,
+                                    :address, :native_place,
+                                    :tax_code, :social_insurance_number,
+                                    :avatar,
+                                    :working_status, :job_title, :info_contract,
+                                    company_employees_attributes: [:id, :company_id],
+                                    group_employees_attributes: [:id, :group_id])
+  end
+
+  routes do
+    collection do
+      get :groups_for_company
+      get :companies
+      get :groups
+    end
   end
 end

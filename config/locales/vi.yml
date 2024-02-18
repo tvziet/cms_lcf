@@ -11,9 +11,9 @@ vi:
         employee:
           attributes:
             company:
-              required: "Công ty là bắt buộc."
+              required: "Nhân viên phải thuộc về công ty."
             group:
-              required: "Nhóm là bắt buộc."
+              required: "Nhân viên phải thuộc về phòng ban."
       messages:
         required: "là bắt buộc."
     attributes:
@@ -26,7 +26,6 @@ vi:
         created_at: 'Được tạo lúc'
         name: 'Tên'
         updated_at: 'Được cập nhật lúc'
-        blank: 'Trống'
       employee:
         address: 'Địa chỉ'
         age: 'Tuổi'

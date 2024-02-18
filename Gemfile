@@ -41,10 +41,9 @@ end
 group :development do
   # Add a comment summarizing the current schema
   gem 'annotate', '~> 3.2'
-
-  #debug
-  gem 'pry'
-
+  gem 'pry', '~> 0.14.2'
+  gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
+  gem 'pry-rails', '~> 0.3.9'
   # Prevent N+1 queries
   gem 'bullet', '~> 7.1', '>= 7.1.6'
 

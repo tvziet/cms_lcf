@@ -22,8 +22,6 @@
 #  working_status          :integer          default("active")
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  company_id              :integer
-#  group_id                :integer
 #
 # Indexes
 #
@@ -41,11 +39,13 @@ class Employee < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
-  #rela
-  belongs_to :company
-  belongs_to :group
+  has_many :company_employees
+  has_many :companies, through: :company_employees
 
-  # accepts_nested_attributes_for :company, :group
+  has_many :group_employees
+  has_many :groups, through: :group_employees
+
+  accepts_nested_attributes_for :company_employees, :group_employees
 
   enum gender: { female: 0, male: 1, unknown: 2 }
   enum working_status: { inactive: 0, active: 1 }
