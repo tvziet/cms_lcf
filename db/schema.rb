@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_28_141247) do
+ActiveRecord::Schema.define(version: 2024_01_29_131492) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,24 @@ ActiveRecord::Schema.define(version: 2024_01_28_141247) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_company_employees_on_company_id"
     t.index ["employee_id"], name: "index_company_employees_on_employee_id"
+  end
+
+  create_table "document_levels", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "document_level_id"
+    t.integer "company_id"
+    t.text "group_ids", default: [], array: true
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_level_id"], name: "index_documents_on_document_level_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -89,5 +107,6 @@ ActiveRecord::Schema.define(version: 2024_01_28_141247) do
   add_foreign_key "company_employees", "employees"
   add_foreign_key "group_employees", "employees"
   add_foreign_key "group_employees", "groups"
+  add_foreign_key "documents", "document_levels"
   add_foreign_key "groups", "companies"
 end

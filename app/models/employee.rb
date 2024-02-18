@@ -53,4 +53,11 @@ class Employee < ApplicationRecord
   def has_avatar?
     avatar.present?
   end
+
+  private
+
+  def age
+    year_of_birth = self.dob.year
+    Date.current.year - year_of_birth
+  end
 end

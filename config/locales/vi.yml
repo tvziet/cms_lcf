@@ -3,6 +3,8 @@ vi:
     models:
       administrator: 'Quản trị viên'
       company: 'Công ty'
+      document: 'Tài liệu'
+      document_level: 'Cấp tài liệu'
       employee: 'Nhân viên'
       group: 'Phòng ban'
       role: 'Quyền'
@@ -23,6 +25,18 @@ vi:
         password: 'Mật khẩu'
         role_ids: 'Quyền'
       company:
+        created_at: 'Được tạo lúc'
+        name: 'Tên'
+        updated_at: 'Được cập nhật lúc'
+      document:
+        body: 'Nội dung'
+        company_id: 'Công ty'
+        created_at: 'Được tạo lúc'
+        document_level_id: 'Cấp tài liệu'
+        group_id: 'Phòng ban'
+        title: 'Tiêu đề'
+        updated_at: 'Được cập nhật lúc'
+      document_level:
         created_at: 'Được tạo lúc'
         name: 'Tên'
         updated_at: 'Được cập nhật lúc'
@@ -74,6 +88,8 @@ vi:
       min_size_error: "Kích thước file phải lớn hơn %{min_size}"
       max_size_error: "Kích thước file phải nhỏ hơn %{max_size}"
   trestle:
+    forms:
+      groups: 'Liên phòng ban'
     tabs:
       general_info: 'Thông tin chung'
       personal_info: 'Thông tin cá nhân'
@@ -82,6 +98,8 @@ vi:
     labels:
       administrators: 'Quản trị viên'
       companies: 'Công ty'
+      document_levels: 'Cấp tài liệu'
+      documents: 'Tài liệu'
       employees: 'Nhân viên'
       groups: 'Phòng ban'
   admin:

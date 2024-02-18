@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
+puts '... Bắt đầu khởi tạo dữ liệu cho quản trị viên ...'
 Administrator.delete_all
 Administrator.create!(email: 'admin@example.com', password: '123123')
+puts '... Khởi tạo thành công dữ liệu cho quản trị viên ...'
 
+puts '======================================================='
+
+puts '... Bắt đầu khởi tạo dữ liệu cho nhân viên ...'
 Employee.delete_all
 Employee.create!(email: 'user1@example.com', password: '123123', full_name: 'User 1',
                  dob: '20/06/1995'.to_date, gender: 1,
@@ -13,7 +18,10 @@ Employee.create!(email: 'user1@example.com', password: '123123', full_name: 'Use
                  info_contract: 1,
                  working_status: 1,
                  job_title: 'Nhân viên kế toán')
+puts '... Khởi tạo thành công dữ liệu cho nhân viên ...'
+puts '======================================================='
 
+puts '... Bắt đầu khởi tạo dữ liệu cho công ty và phòng ban ...'
 Group.delete_all
 Company.delete_all
 
@@ -22,3 +30,16 @@ company_2 = Company.create(name: 'KMS Vina')
 
 Group.create(name: 'Nhân sự', company_id: company_1.id)
 Group.create(name: 'Nhân sự', company_id: company_2.id)
+puts '... Khởi tạo thành công dữ liệu cho công ty và phòng ban ...'
+
+puts '======================================================='
+
+puts '... Bắt đầu khởi tạo dữ liệu cho cấp tài liệu ...'
+DocumentLevel.delete_all
+DocumentLevel.create(name: 'Tài liệu cấp 1')
+DocumentLevel.create(name: 'Tài liệu cấp 2')
+DocumentLevel.create(name: 'Tài liệu cấp 3')
+DocumentLevel.create(name: 'Tài liệu cấp 4')
+puts '... Khởi tạo thành công dữ liệu cho cấp tài liệu ...'
+
+puts '======================================================='
