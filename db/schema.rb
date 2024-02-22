@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2024_01_29_131492) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "company_employees", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_employees_on_company_id"
+    t.index ["employee_id"], name: "index_company_employees_on_employee_id"
+  end
+
   create_table "document_levels", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -77,6 +86,15 @@ ActiveRecord::Schema.define(version: 2024_01_29_131492) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "group_employees", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_group_employees_on_employee_id"
+    t.index ["group_id"], name: "index_group_employees_on_group_id"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.bigint "company_id"
@@ -85,6 +103,10 @@ ActiveRecord::Schema.define(version: 2024_01_29_131492) do
     t.index ["company_id"], name: "index_groups_on_company_id"
   end
 
+  add_foreign_key "company_employees", "companies"
+  add_foreign_key "company_employees", "employees"
+  add_foreign_key "group_employees", "employees"
+  add_foreign_key "group_employees", "groups"
   add_foreign_key "documents", "document_levels"
   add_foreign_key "groups", "companies"
 end

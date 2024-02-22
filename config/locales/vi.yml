@@ -8,6 +8,16 @@ vi:
       employee: 'Nhân viên'
       group: 'Phòng ban'
       role: 'Quyền'
+    errors:
+      models:
+        employee:
+          attributes:
+            company:
+              required: "Nhân viên phải thuộc về công ty."
+            group:
+              required: "Nhân viên phải thuộc về phòng ban."
+      messages:
+        required: "là bắt buộc."
     attributes:
       administrator:
         avatar: 'Hình đại diện'
@@ -66,6 +76,7 @@ vi:
           active: 'Đang làm'
   errors:
     messages:
+      required: "là bắt buộc."
       carrierwave_processing_error: 'không xử lý được'
       carrierwave_integrity_error: 'không phải là kiểu file hợp lệ'
       carrierwave_download_error: 'không thể download'

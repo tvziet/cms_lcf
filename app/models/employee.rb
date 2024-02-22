@@ -39,6 +39,14 @@ class Employee < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
+  has_many :company_employees
+  has_many :companies, through: :company_employees
+
+  has_many :group_employees
+  has_many :groups, through: :group_employees
+
+  accepts_nested_attributes_for :company_employees, :group_employees
+
   enum gender: { female: 0, male: 1, unknown: 2 }
   enum working_status: { inactive: 0, active: 1 }
 
