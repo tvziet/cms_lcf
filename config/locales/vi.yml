@@ -95,6 +95,7 @@ vi:
       personal_info: 'Thông tin cá nhân'
       role_info: 'Thông tin quyền'
       work_info: 'Thông tin công việc'
+      contract_info: 'Thông tin hợp đồng'
     labels:
       administrators: 'Quản trị viên'
       companies: 'Công ty'
@@ -105,3 +106,5 @@ vi:
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"
+  links:
+    add_companies_and_groups: 'Thêm công ty và phòng ban'

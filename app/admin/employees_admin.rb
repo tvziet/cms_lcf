@@ -11,8 +11,8 @@ Trestle.resource(:employees) do
 
   controller do
     def groups_for_company
-      company = Company.find(params[:company_id])
-      groups = company.groups
+      company = Company.find_by(id: params[:company_id])
+      groups = company&.groups
 
       render json: groups.map { |group| { id: group.id, name: group.name } }
     end
@@ -33,11 +33,15 @@ Trestle.resource(:employees) do
     column :email
     column :full_name
     column :avatar, align: :center do |employee|
-      employee.has_avatar? ? image_tag(employee.avatar.url,
-                                       id: 'avatar',
-                                       loading: 'lazy') : image_tag('fallback/default.png',
-                                                                    id: 'avatar',
-                                                                    loading: 'lazy')
+      if employee.has_avatar?
+        image_tag(employee.avatar.url,
+                  id: 'avatar',
+                  loading: 'lazy')
+      else
+        image_tag('fallback/default.png',
+                  id: 'avatar',
+                  loading: 'lazy')
+      end
     end
     column :age
     column :gender do |employee|
@@ -88,27 +92,38 @@ Trestle.resource(:employees) do
         col(sm: 6) { select(:working_status, Employee.values(:working_statuses)) }
         col(sm: 6) { text_field :job_title }
       end
-      row do
-        col(sm: 4) {
-          content_tag :div, id: 'companies' do
-            fields_for :company_employees, (employee.company_employees.any? ? employee.company_employees : employee.company_employees.build) do |company_employee|
-              company_employee.select :company_id, Company.all.map { |company| [company.name, company.id] }, selected: company_employee.object.company_id
-            end
-          end
-        }
 
-        col(sm: 4) {
-          content_tag :div, id: 'groups' do
-            fields_for :group_employees, (employee.group_employees.any? ? employee.group_employees : employee.group_employees.build) do |group_employee|
-              group_employee.select :group_id, Group.all.map { |group| [group.name, group.id] }, selected: group_employee.object.group_id
-            end
-          end
-        }
-        col(sm: 4) {
-          link_to 'Add Company and Group', '#', id: 'add_company_and_group'
-        }
+      row do
+        col(sm: 4) do
+          link_to t('links.add_companies_and_groups'), '#', id: 'add_company_and_group'
+        end
       end
 
+      row do
+        col(sm: 6) do
+          content_tag :div, id: 'companies' do
+            fields_for :company_employees,
+                       employee.company_employees || employee.company_employees.build do |company_employee|
+              company_employee.select :company_id, Company.all.map { |company|
+                                                     [company.name, company.id]
+                                                   }, selected: company_employee.object.company_id
+            end
+          end
+        end
+
+        col(sm: 6) do
+          content_tag :div, id: 'groups' do
+            fields_for :group_employees, employee.group_employees || employee.build_group_employees do |group_employee|
+              group_employee.select :group_id, Group.all.map { |group|
+                                                 [group.name, group.id]
+                                               }, selected: group_employee.object.group_id
+            end
+          end
+        end
+      end
+    end
+
+    tab :contract_info, label: t('trestle.tabs.contract_info') do
       row do
         col(sm: 12) { editor :info_contract }
       end
@@ -127,13 +142,13 @@ Trestle.resource(:employees) do
 
   params do |params|
     params.require(:employee).permit(:email, :password,
-                                    :full_name, :gender,
-                                    :address, :native_place,
-                                    :tax_code, :social_insurance_number,
-                                    :avatar,
-                                    :working_status, :job_title, :info_contract,
-                                    company_employees_attributes: [:id, :company_id],
-                                    group_employees_attributes: [:id, :group_id])
+                                     :full_name, :gender,
+                                     :address, :native_place,
+                                     :tax_code, :social_insurance_number,
+                                     :avatar,
+                                     :working_status, :job_title, :info_contract,
+                                     company_employees_attributes: %i[id company_id],
+                                     group_employees_attributes: %i[id group_id])
   end
 
   routes do

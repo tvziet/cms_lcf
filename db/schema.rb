@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(version: 2024_01_29_131492) do
 
   add_foreign_key "company_employees", "companies"
   add_foreign_key "company_employees", "employees"
+  add_foreign_key "documents", "document_levels"
   add_foreign_key "group_employees", "employees"
   add_foreign_key "group_employees", "groups"
-  add_foreign_key "documents", "document_levels"
   add_foreign_key "groups", "companies"
 end
