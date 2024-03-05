@@ -1,4 +1,99 @@
 $(document).on('turbolinks:load', function() {
+
+  $('#document_group_ids').empty().prop('disabled', true);
+  $('#document_group_id').empty().prop('disabled', true);
+
+  $('.delete-button').click(function() {
+    var id = $(this).attr('id');
+    var companyId = $(this).data('company-id');
+    var dataIndex = $(this).data('index');
+    var button = $(this);
+    console.log(id);
+    $.ajax({
+      url: + id + '/delete',
+      data: {
+        company_id: companyId
+      },
+      type: 'DELETE',
+      success: function(result) {
+        console.log(34534534);
+        var companySelectId = 'employee_company_employees_attributes_' + dataIndex + '_company_id';
+        var groupSelectId = 'employee_group_employees_attributes_' + dataIndex + '_group_id';
+        $('#' + companySelectId).next('.select2-container').remove();
+        $('#' + groupSelectId).next('.select2-container').remove();
+        $('#' + companySelectId).remove();
+        $('#' + groupSelectId).remove();
+
+        $("label[for='" + companySelectId + "']").remove();
+        $("label[for='" + groupSelectId + "']").remove();
+        button.remove();
+      }
+    });
+  });
+
+  $('#document_document_level_id').change(function() {
+    var documentLevelId = $(this).val();
+
+    if (documentLevelId == '1') {
+      $('#document_group_ids').empty().prop('disabled', true);
+      $('#document_group_id').empty().prop('disabled', true);
+      $.ajax({
+        url: '/admin/documents/document_level_default',
+        data: {
+          document_level_id: documentLevelId
+        },
+        success: function(data) {
+          var companySelectId = $('#document_company_id');
+          companySelectId.empty().prop('disabled', false);
+
+          $.each(data, function(index, group) {
+            companySelectId.append($('<option></option>').attr('value', group.id).text(group.name));
+          });
+        }
+      });
+    } else if (documentLevelId == '2') {
+      $('#document_company_id').empty().prop('disabled', true);
+      $('#document_group_id').empty().prop('disabled', true);
+      $.ajax({
+        url: '/admin/documents/document_level',
+        data: {
+          document_level_id: documentLevelId
+        },
+        success: function(data) {
+          var groupSelectIds = $('#document_group_ids');
+          groupSelectIds.empty().prop('disabled', false);
+
+          $.each(data, function(index, group) {
+            groupSelectIds.append($('<option></option>').attr('value', group.id).text(group.name));
+          });
+        }
+      });
+    } else if (documentLevelId == '3') {
+      $('#document_company_id').empty().prop('disabled', true);
+      $('#document_group_ids').empty().prop('disabled', true);
+      $.ajax({
+        url: '/admin/documents/document_level',
+        data: {
+          document_level_id: documentLevelId
+        },
+        success: function(data) {
+          var groupSelectId = $('#document_group_id');
+
+          groupSelectId.empty().prop('disabled', false);
+
+          $.each(data, function(index, group) {
+            groupSelectId.append($('<option></option>').attr('value', group.id).text(group.name));
+          });
+        }
+      });
+    }
+    else if (documentLevelId == '4') {
+      $('#document_company_id').empty().prop('disabled', true);
+      $('#document_group_ids').empty().prop('disabled', true);
+      $('#document_group_id').empty().prop('disabled', true);
+    }
+  });
+
   var newCompanyField;
 
   $(document).on('change', '[id^="employee_company_employees_company_id_"]', function() {
@@ -100,5 +195,23 @@ $(document).on('turbolinks:load', function() {
         });
       });
     });
+    var deleteButton = $('<button></button>')
+    .text('Delete')
+    .data('timestamp', timestamp)
+    .click(function() {
+      var timestamp = $(this).data('timestamp');
+      var companySelectId = 'employee_company_employees_company_id_' + timestamp;
+      var groupSelectId = 'employee_group_employees_group_id_' + timestamp;
+
+      $('#' + companySelectId).next('.select2-container').remove();
+      $('#' + groupSelectId).next('.select2-container').remove();
+
+      $('#' + companySelectId).remove();
+      $('#' + groupSelectId).remove();
+
+      $(this).remove();
+    });
+
+  $('#companies').append(deleteButton);
   });
 });

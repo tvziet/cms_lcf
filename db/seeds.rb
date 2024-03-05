@@ -8,6 +8,9 @@ puts '... Khởi tạo thành công dữ liệu cho quản trị viên ...'
 puts '======================================================='
 
 puts '... Bắt đầu khởi tạo dữ liệu cho nhân viên ...'
+
+CompanyEmployee.delete_all
+GroupEmployee.delete_all
 Employee.delete_all
 Employee.create!(email: 'user1@example.com', password: '123123', full_name: 'User 1',
                  dob: '20/06/1995'.to_date, gender: 1,

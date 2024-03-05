@@ -28,6 +28,11 @@ Trestle.resource(:employees) do
       groups = Company.first.groups
       render json: groups.map { |group| { id: group.id, name: group.name } }
     end
+
+    def delete
+      CompanyEmployee.find_by(id: params[:company_id]).destroy
+      GroupEmployee.find_by(id: params[:id]).destroy
+    end
   end
   table do
     column :id
@@ -97,7 +102,7 @@ Trestle.resource(:employees) do
       end
 
       row do
-        col(sm: 6) do
+        col(sm: 5) do
           content_tag(:div, id: 'companies') do
             fields_for :company_employees, employee.company_employees || employee.build_company_employees do |company_employee|
               company_employee.select :company_id, Company.all.map { |company| [company.name, company.id] },
@@ -106,12 +111,26 @@ Trestle.resource(:employees) do
           end
         end
 
-        col(sm: 6) do
+        col(sm: 5) do
           content_tag :div, id: 'groups' do
             fields_for :group_employees, employee.group_employees || employee.build_group_employees do |group_employee|
               selected_company_id = Group.find(group_employee.object.group_id)&.company_id
               group_employee.select :group_id, Group.where(company_id: selected_company_id).map { |group| [group.name, group.id] },
                                     selected: group_employee.object.group_id, label: t('trestle.labels.groups')
+            end
+          end
+        end
+        col(sm: 2) do
+          content_tag :div, id: 'groups' do
+            (employee.group_employees || employee.build_group_employees).each_with_index do |group_employee, index|
+              selected_company_id = Group.find(group_employee.group_id)&.company_id
+              fields_for :group_employees, group_employee do |ge|
+                ge.select :group_id, Group.where(company_id: selected_company_id).map { |group| [group.name, group.id] },
+                          selected: group_employee.group_id, label: t('trestle.labels.groups')
+
+                company_employee = employee.company_employees.find_by(company_id: selected_company_id)
+                link_to 'Delete', '#', class: 'delete-button', id: group_employee.id, data: { company_id: company_employee&.id, index: index }
+              end
             end
           end
         end
@@ -151,6 +170,9 @@ Trestle.resource(:employees) do
       get :groups_for_company
       get :companies
       get :groups
+    end
+    member do
+      delete :delete
     end
   end
 end
