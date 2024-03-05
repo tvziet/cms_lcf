@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: employees
@@ -57,7 +59,7 @@ class Employee < ApplicationRecord
   private
 
   def age
-    year_of_birth = self.dob&.year
+    year_of_birth = dob&.year
     Date.current.year - year_of_birth if year_of_birth
   end
 end
