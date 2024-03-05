@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 Trestle.configure do |config|
   # == Customization Options
   #
   # Set the page title shown in the main header within the admin.
   #
-  config.site_title = "Cms Lcf"
+  config.site_title = 'Cms Lcf'
 
   # Specify a custom image to be used in place of the site title for mobile and
   # expanded/desktop navigation. These images should be placed within your
@@ -148,7 +150,7 @@ Trestle.configure do |config|
 
   # Specify the Trestle admin for managing the current user (My Account).
   #
-  config.auth.user_admin = -> { :"auth/account" }
+  config.auth.user_admin = -> { :'auth/account' }
 
   # Specify the parameter (along with a password) to be used to
   # authenticate an administrator. Defaults to :email if not specified below.
@@ -158,15 +160,14 @@ Trestle.configure do |config|
   # Customize the rendering of user avatars. Can be disabled by setting to false.
   # Defaults to the Gravatar based on the user's email address.
   #
-  config.auth.avatar = ->(user) {
+  config.auth.avatar = lambda { |user|
     if user.avatar.present?
       image_tag(user.avatar.url, alt: user.full_name,
-                id: 'avatar',
-                data: { behavior: 'zoom' },
-                loading: 'lazy')
+                                 id: 'avatar',
+                                 data: { behavior: 'zoom' },
+                                 loading: 'lazy')
     end
   }
-
 
   # Customize the rendering of the current user's name in the main header.
   # Defaults to the user's #first_name and #last_name (last name in bold),
@@ -237,15 +238,15 @@ Trestle.configure do |config|
     c.elementpath = false
     c.menubar = false
     c.statusbar = false
-    c.plugins = [
-      :lists,
-      :link,
-      :image,
-      :charmap,
-      :table,
-      :code,
-      :hr,
-      :paste
+    c.plugins = %i[
+      lists
+      link
+      image
+      charmap
+      table
+      code
+      hr
+      paste
     ]
     c.toolbar = [
       'styleselect | bold italic underline strikethrough | subscript superscript hr | alignleft aligncenter alignright alignjustify',

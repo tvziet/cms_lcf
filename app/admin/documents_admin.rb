@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:documents) do
   menu do
     item :documents, icon: 'fa fa-file', label: t('trestle.labels.documents')
@@ -24,7 +26,7 @@ Trestle.resource(:documents) do
     end
 
     row do
-      col(sm: 12) { collection_select :document_level_id, DocumentLevel.all, :id, :name}
+      col(sm: 12) { collection_select :document_level_id, DocumentLevel.all, :id, :name }
     end
 
     row do
@@ -32,14 +34,13 @@ Trestle.resource(:documents) do
     end
 
     row do
-      col(sm: 12) { select :group_ids, Group.all, { label: t('trestle.forms.groups') },  multiple: true }
+      col(sm: 12) { select :group_ids, Group.all, { label: t('trestle.forms.groups') }, multiple: true }
     end
 
     row do
       col(sm: 12) { collection_select :group_id, Group.all, :id, :name }
     end
   end
-
 
   params do |params|
     params.require(:document).permit(:title, :body, :document_level_id)

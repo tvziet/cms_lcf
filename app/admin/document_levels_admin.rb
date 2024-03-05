@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:document_levels) do
   menu do
     item :document_levels, icon: 'fa fa-level-up', label: t('trestle.labels.document_levels')

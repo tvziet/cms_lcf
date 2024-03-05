@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:employees) do
   menu do
     item :employees, icon: 'fas fa-users', label: t('trestle.labels.employees')
@@ -27,13 +29,12 @@ Trestle.resource(:employees) do
       render json: groups.map { |group| { id: group.id, name: group.name } }
     end
   end
-
   table do
     column :id
     column :email
     column :full_name
     column :avatar, align: :center do |employee|
-      if employee.has_avatar?
+      if employee.avatar?
         image_tag(employee.avatar.url,
                   id: 'avatar',
                   loading: 'lazy')
@@ -103,7 +104,7 @@ Trestle.resource(:employees) do
         col(sm: 6) do
           content_tag :div, id: 'companies' do
             fields_for :company_employees,
-                       employee.company_employees || employee.company_employees.build do |company_employee|
+                       employee.company_employees || employee.build_company_employees do |company_employee|
               company_employee.select :company_id, Company.all.map { |company|
                                                      [company.name, company.id]
                                                    }, selected: company_employee.object.company_id
@@ -131,7 +132,7 @@ Trestle.resource(:employees) do
 
     sidebar do
       form_group :avatar, label: false do
-        if employee.has_avatar?
+        if employee.avatar?
           link_to image_tag(employee.avatar.url(:thumb)), employee.avatar_url, data: { behavior: 'zoom' }
         else
           image_tag('fallback/default.png', id: 'employee_default_avatar', loading: 'lazy')

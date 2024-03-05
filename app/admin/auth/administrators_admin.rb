@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:administrators, model: Administrator, scope: Auth) do
   menu do
     group :configuration, priority: :last do
@@ -48,9 +50,9 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
   end
 
   # Log the current user back in if their password was changed
-  after_action on: :update do
-    if instance == current_user && instance.encrypted_password_previously_changed?
-      login!(instance)
+  if Devise.sign_in_after_reset_password
+    after_action on: :update do
+      login!(instance) if instance == current_user && instance.encrypted_password_previously_changed?
     end
-  end if Devise.sign_in_after_reset_password
+  end
 end

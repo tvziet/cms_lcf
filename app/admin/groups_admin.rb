@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:groups) do
   menu do
     item :groups, icon: 'fa fa-briefcase', label: t('trestle.labels.groups')
@@ -6,7 +8,6 @@ Trestle.resource(:groups) do
   collection do
     model.includes(:company)
   end
-
 
   table do
     column :name

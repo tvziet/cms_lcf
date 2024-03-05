@@ -47,9 +47,6 @@ group :development do
   # Prevent N+1 queries
   gem 'bullet', '~> 7.1', '>= 7.1.6'
 
-  gem 'solargraph', '~> 0.50.0'
-  gem 'yard', '~> 0.9.34'
-
   # Linting codes
   gem 'rubocop', '~> 1.60', '>= 1.60.2'
   gem 'rubocop-performance', '~> 1.20', '>= 1.20.2'

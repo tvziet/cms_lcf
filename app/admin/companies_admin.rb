@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:companies) do
   menu do
     item :companies, icon: 'fa fa-building', label: t('trestle.labels.companies')

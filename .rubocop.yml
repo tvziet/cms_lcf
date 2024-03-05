@@ -35,6 +35,7 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - 'lib/tasks/*'
+    - 'app/admin/*'
 
 
 # Style Cops
