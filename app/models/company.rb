@@ -16,4 +16,8 @@ class Company < ApplicationRecord
   has_many :employees, through: :company_employees
 
   default_scope { order(id: :asc) }
+
+  def num_of_employees
+    employees.count
+  end
 end

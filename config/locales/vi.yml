@@ -90,6 +90,8 @@ vi:
   trestle:
     forms:
       groups: 'Liên phòng ban'
+    headers:
+      num_of_employees: 'Số lượng nhân viên'
     tabs:
       general_info: 'Thông tin chung'
       personal_info: 'Thông tin cá nhân'
