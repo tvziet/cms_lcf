@@ -41,7 +41,9 @@ end
 group :development do
   # Add a comment summarizing the current schema
   gem 'annotate', '~> 3.2'
-
+  gem 'pry', '~> 0.14.2'
+  gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
+  gem 'pry-rails', '~> 0.3.9'
   # Prevent N+1 queries
   gem 'bullet', '~> 7.1', '>= 7.1.6'
 
@@ -54,6 +56,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+
+  # Add support for debugging
+  gem 'pry', '~> 0.14.2'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

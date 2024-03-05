@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: groups
@@ -18,4 +20,7 @@
 #
 class Group < ApplicationRecord
   belongs_to :company
+
+  has_many :group_employees
+  has_many :employees, through: :group_employees
 end

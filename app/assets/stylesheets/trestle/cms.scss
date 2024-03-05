@@ -1,3 +1,21 @@
 #avatar {
   height: 55px;
 }
+
+#add_company_and_group {
+  color: #da5652;
+
+  &:hover {
+    text-decoration: none;
+    color: #e1110a;
+  }
+}
+
+#companies,
+#groups {
+
+  .form-group,
+  .select2 {
+    margin-bottom: 10px;
+  }
+}

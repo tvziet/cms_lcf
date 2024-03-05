@@ -3,9 +3,21 @@ vi:
     models:
       administrator: 'Quản trị viên'
       company: 'Công ty'
+      document: 'Tài liệu'
+      document_level: 'Cấp tài liệu'
       employee: 'Nhân viên'
       group: 'Phòng ban'
       role: 'Quyền'
+    errors:
+      models:
+        employee:
+          attributes:
+            company:
+              required: "Nhân viên phải thuộc về công ty."
+            group:
+              required: "Nhân viên phải thuộc về phòng ban."
+      messages:
+        required: "là bắt buộc."
     attributes:
       administrator:
         avatar: 'Hình đại diện'
@@ -13,6 +25,18 @@ vi:
         password: 'Mật khẩu'
         role_ids: 'Quyền'
       company:
+        created_at: 'Được tạo lúc'
+        name: 'Tên'
+        updated_at: 'Được cập nhật lúc'
+      document:
+        body: 'Nội dung'
+        company_id: 'Công ty'
+        created_at: 'Được tạo lúc'
+        document_level_id: 'Cấp tài liệu'
+        group_id: 'Phòng ban'
+        title: 'Tiêu đề'
+        updated_at: 'Được cập nhật lúc'
+      document_level:
         created_at: 'Được tạo lúc'
         name: 'Tên'
         updated_at: 'Được cập nhật lúc'
@@ -52,6 +76,7 @@ vi:
           active: 'Đang làm'
   errors:
     messages:
+      required: "là bắt buộc."
       carrierwave_processing_error: 'không xử lý được'
       carrierwave_integrity_error: 'không phải là kiểu file hợp lệ'
       carrierwave_download_error: 'không thể download'
@@ -63,16 +88,23 @@ vi:
       min_size_error: "Kích thước file phải lớn hơn %{min_size}"
       max_size_error: "Kích thước file phải nhỏ hơn %{max_size}"
   trestle:
+    forms:
+      groups: 'Liên phòng ban'
     tabs:
       general_info: 'Thông tin chung'
       personal_info: 'Thông tin cá nhân'
       role_info: 'Thông tin quyền'
       work_info: 'Thông tin công việc'
+      contract_info: 'Thông tin hợp đồng'
     labels:
       administrators: 'Quản trị viên'
       companies: 'Công ty'
+      document_levels: 'Cấp tài liệu'
+      documents: 'Tài liệu'
       employees: 'Nhân viên'
       groups: 'Phòng ban'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"
+  links:
+    add_companies_and_groups: 'Thêm công ty và phòng ban'

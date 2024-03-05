@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: companies
@@ -9,4 +11,9 @@
 #
 class Company < ApplicationRecord
   has_many :groups
+
+  has_many :company_employees
+  has_many :employees, through: :company_employees
+
+  default_scope { order(id: :asc) }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:employees) do
   menu do
     item :employees, icon: 'fas fa-users', label: t('trestle.labels.employees')
@@ -9,16 +11,34 @@ Trestle.resource(:employees) do
     instance.assign_attributes(attrs)
   end
 
+  controller do
+    def groups_for_company
+      company = Company.find_by(id: params[:company_id])
+      groups = company&.groups
+
+      render json: groups.map { |group| { id: group.id, name: group.name } }
+    end
+
+    def companies
+      companies = Company.all
+      render json: companies.map { |company| { id: company.id, name: company.name } }
+    end
+
+    def groups
+      groups = Company.first.groups
+      render json: groups.map { |group| { id: group.id, name: group.name } }
+    end
+  end
   table do
     column :id
     column :email
     column :full_name
     column :avatar, align: :center do |employee|
-      employee.has_avatar? ? image_tag(employee.avatar.url,
-                                       id: 'avatar',
-                                       loading: 'lazy') : image_tag('fallback/default.png',
-                                                                    id: 'avatar',
-                                                                    loading: 'lazy')
+      if employee.avatar?
+        image_tag(employee.avatar.url, id: 'avatar', loading: 'lazy')
+      else
+        image_tag('fallback/default.png', id: 'avatar', loading: 'lazy')
+      end
     end
     column :age
     column :gender do |employee|
@@ -71,13 +91,42 @@ Trestle.resource(:employees) do
       end
 
       row do
+        col(sm: 4) do
+          link_to t('links.add_companies_and_groups'), '#', id: 'add_company_and_group'
+        end
+      end
+
+      row do
+        col(sm: 6) do
+          content_tag(:div, id: 'companies') do
+            fields_for :company_employees, employee.company_employees || employee.build_company_employees do |company_employee|
+              company_employee.select :company_id, Company.all.map { |company| [company.name, company.id] },
+                                      selected: company_employee.object.company_id, label: t('trestle.labels.companies')
+            end
+          end
+        end
+
+        col(sm: 6) do
+          content_tag :div, id: 'groups' do
+            fields_for :group_employees, employee.group_employees || employee.build_group_employees do |group_employee|
+              selected_company_id = Group.find(group_employee.object.group_id)&.company_id
+              group_employee.select :group_id, Group.where(company_id: selected_company_id).map { |group| [group.name, group.id] },
+                                    selected: group_employee.object.group_id, label: t('trestle.labels.groups')
+            end
+          end
+        end
+      end
+    end
+
+    tab :contract_info, label: t('trestle.tabs.contract_info') do
+      row do
         col(sm: 12) { editor :info_contract }
       end
     end
 
     sidebar do
       form_group :avatar, label: false do
-        if employee.has_avatar?
+        if employee.avatar?
           link_to image_tag(employee.avatar.url(:thumb)), employee.avatar_url, data: { behavior: 'zoom' }
         else
           image_tag('fallback/default.png', id: 'employee_default_avatar', loading: 'lazy')
@@ -91,6 +140,17 @@ Trestle.resource(:employees) do
                                      :full_name, :gender,
                                      :address, :native_place,
                                      :tax_code, :social_insurance_number,
-                                     :avatar)
+                                     :avatar,
+                                     :working_status, :job_title, :info_contract,
+                                     company_employees_attributes: %i[id company_id],
+                                     group_employees_attributes: %i[id group_id])
+  end
+
+  routes do
+    collection do
+      get :groups_for_company
+      get :companies
+      get :groups
+    end
   end
 end
