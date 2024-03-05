@@ -35,13 +35,9 @@ Trestle.resource(:employees) do
     column :full_name
     column :avatar, align: :center do |employee|
       if employee.avatar?
-        image_tag(employee.avatar.url,
-                  id: 'avatar',
-                  loading: 'lazy')
+        image_tag(employee.avatar.url, id: 'avatar', loading: 'lazy')
       else
-        image_tag('fallback/default.png',
-                  id: 'avatar',
-                  loading: 'lazy')
+        image_tag('fallback/default.png', id: 'avatar', loading: 'lazy')
       end
     end
     column :age
@@ -102,12 +98,10 @@ Trestle.resource(:employees) do
 
       row do
         col(sm: 6) do
-          content_tag :div, id: 'companies' do
-            fields_for :company_employees,
-                       employee.company_employees || employee.build_company_employees do |company_employee|
-              company_employee.select :company_id, Company.all.map { |company|
-                                                     [company.name, company.id]
-                                                   }, selected: company_employee.object.company_id
+          content_tag(:div, id: 'companies') do
+            fields_for :company_employees, employee.company_employees || employee.build_company_employees do |company_employee|
+              company_employee.select :company_id, Company.all.map { |company| [company.name, company.id] },
+                                      selected: company_employee.object.company_id, label: t('trestle.labels.companies')
             end
           end
         end
@@ -115,9 +109,9 @@ Trestle.resource(:employees) do
         col(sm: 6) do
           content_tag :div, id: 'groups' do
             fields_for :group_employees, employee.group_employees || employee.build_group_employees do |group_employee|
-              group_employee.select :group_id, Group.where(company_id: Group.find(group_employee.object.group_id).company_id).map { |group|
-                                                 [group.name, group.id]
-                                               }, selected: group_employee.object.group_id
+              selected_company_id = Group.find(group_employee.object.group_id)&.company_id
+              group_employee.select :group_id, Group.where(company_id: selected_company_id).map { |group| [group.name, group.id] },
+                                    selected: group_employee.object.group_id, label: t('trestle.labels.groups')
             end
           end
         end
