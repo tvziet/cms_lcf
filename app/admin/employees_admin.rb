@@ -23,7 +23,7 @@ Trestle.resource(:employees) do
     end
 
     def groups
-      groups = Group.all
+      groups = Company.first.groups
       render json: groups.map { |group| { id: group.id, name: group.name } }
     end
   end
@@ -114,7 +114,7 @@ Trestle.resource(:employees) do
         col(sm: 6) do
           content_tag :div, id: 'groups' do
             fields_for :group_employees, employee.group_employees || employee.build_group_employees do |group_employee|
-              group_employee.select :group_id, Group.all.map { |group|
+              group_employee.select :group_id, Group.where(company_id: Group.find(group_employee.object.group_id).company_id).map { |group|
                                                  [group.name, group.id]
                                                }, selected: group_employee.object.group_id
             end
