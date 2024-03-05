@@ -57,7 +57,7 @@ class Employee < ApplicationRecord
   private
 
   def age
-    year_of_birth = self.dob.year
-    Date.current.year - year_of_birth
+    year_of_birth = self.dob&.year
+    Date.current.year - year_of_birth if year_of_birth
   end
 end
