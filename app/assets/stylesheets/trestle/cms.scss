@@ -13,9 +13,37 @@
 
 #companies,
 #groups {
-
+  padding-top: 10px;
   .form-group,
   .select2 {
     margin-bottom: 10px;
   }
 }
+
+#groups {
+  .delete-button {
+    color: red;
+    margin-left: 10px;
+  }
+}
+
+.delete-button {
+  background-color: #da5652;
+  color: #fff;
+  border: 1px solid #da5652;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  width: 80%;
+}
+
+// .your-class-name {
+//   .col-sm-4 {
+//     display: grid;
+//     grid-template-rows: 1fr 1fr; // Tạo 2 hàng với kích thước bằng nhau
+
+//     #groups {
+//       grid-row: 2; // Đặt #groups ở hàng thứ hai
+//     }
+//   }
+// }

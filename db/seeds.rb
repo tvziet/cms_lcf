@@ -39,10 +39,10 @@ puts '======================================================='
 
 puts '... Bắt đầu khởi tạo dữ liệu cho cấp tài liệu ...'
 DocumentLevel.delete_all
-DocumentLevel.create(name: 'Tài liệu cấp 1')
-DocumentLevel.create(name: 'Tài liệu cấp 2')
-DocumentLevel.create(name: 'Tài liệu cấp 3')
-DocumentLevel.create(name: 'Tài liệu cấp 4')
+DocumentLevel.create(id: 1, name: 'Tài liệu cấp 1')
+DocumentLevel.create(id: 2, name: 'Tài liệu cấp 2')
+DocumentLevel.create(id: 3, name: 'Tài liệu cấp 3')
+DocumentLevel.create(id: 4, name: 'Tài liệu cấp 4')
 puts '... Khởi tạo thành công dữ liệu cho cấp tài liệu ...'
 
 puts '======================================================='
