@@ -23,4 +23,12 @@ class Group < ApplicationRecord
 
   has_many :group_employees
   has_many :employees, through: :group_employees
+
+  def business_name
+    "#{name} - (#{company.name})"
+  end
+
+  def num_of_employees
+    employees.size
+  end
 end

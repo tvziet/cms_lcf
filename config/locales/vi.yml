@@ -57,9 +57,10 @@ vi:
         updated_at: 'Được cập nhật lúc'
         working_status: 'Trạng thái làm việc'
       group:
-        name: 'Tên'
         company_id: 'Công ty'
         created_at: 'Được tạo lúc'
+        employee_ids: 'Nhân viên'
+        name: 'Tên'
         updated_at: 'Được cập nhật lúc'
       role:
         name: 'Tên'
@@ -90,14 +91,20 @@ vi:
   trestle:
     forms:
       groups: 'Liên phòng ban'
+    groups:
+      configuration: 'Cấu hình'
+      resources: 'Tài nguyên'
     headers:
+      groups: 'Phòng ban'
+      num_of_documents: 'Số lượng tài liệu'
       num_of_employees: 'Số lượng nhân viên'
     tabs:
+      contract_info: 'Thông tin hợp đồng'
       general_info: 'Thông tin chung'
+      groups_and_employees_info: 'Thông tin phòng ban và nhân viên'
       personal_info: 'Thông tin cá nhân'
       role_info: 'Thông tin quyền'
       work_info: 'Thông tin công việc'
-      contract_info: 'Thông tin hợp đồng'
     labels:
       administrators: 'Quản trị viên'
       companies: 'Công ty'

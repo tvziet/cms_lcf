@@ -32,7 +32,7 @@ company_1 = Company.create(name: 'LC Foods')
 company_2 = Company.create(name: 'KMS Vina')
 
 Group.create(name: 'Nhân sự', company_id: company_1.id)
-Group.create(name: 'Nhân sự', company_id: company_2.id)
+Group.create(name: 'IT', company_id: company_2.id)
 puts '... Khởi tạo thành công dữ liệu cho công ty và phòng ban ...'
 
 puts '======================================================='
