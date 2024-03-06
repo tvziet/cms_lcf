@@ -24,7 +24,7 @@ Trestle.configure do |config|
   # Set the text shown in the page footer within the admin.
   # Defaults to 'Powered by Trestle'.
   #
-  # config.footer = "Powered by Trestle"
+  config.footer = "#{Date.current.strftime('%d-%m-%Y')}"
 
   # Sets the default precision for timestamps (either :minutes or :seconds).
   # Defaults to :minutes.
@@ -162,10 +162,9 @@ Trestle.configure do |config|
   #
   config.auth.avatar = lambda { |user|
     if user.avatar.present?
-      image_tag(user.avatar.url, alt: user.full_name,
-                                 id: 'avatar',
-                                 data: { behavior: 'zoom' },
-                                 loading: 'lazy')
+      image_tag(user.avatar.url, alt: user.full_name, id: 'avatar', data: { behavior: 'zoom' }, loading: 'lazy')
+    else
+      image_tag('fallback/default_admin.jpeg', id: 'avatar', loading: 'lazy')
     end
   }
 

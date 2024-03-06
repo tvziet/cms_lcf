@@ -2,7 +2,7 @@
 
 puts '... Bắt đầu khởi tạo dữ liệu cho quản trị viên ...'
 Administrator.delete_all
-Administrator.create!(email: 'admin@example.com', password: '123123')
+Administrator.create!(email: 'admin@example.com', password: '123123', full_name: 'Tạ Công Huân')
 puts '... Khởi tạo thành công dữ liệu cho quản trị viên ...'
 
 puts '======================================================='

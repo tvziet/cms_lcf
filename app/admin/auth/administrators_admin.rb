@@ -8,7 +8,9 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
   end
 
   table do
-    column :avatar, header: false do |administrator|
+    column :id
+
+    column :avatar do |administrator|
       avatar_for(administrator)
     end
 
@@ -36,6 +38,7 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
     end
 
     tab :role_info, label: t('trestle.tabs.role_info') do
+
     end
   end
 
