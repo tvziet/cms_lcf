@@ -2,7 +2,7 @@
 
 Trestle.resource(:administrators, model: Administrator, scope: Auth) do
   menu do
-    group :configuration, priority: :last do
+    group t('trestle.groups.configuration'), priority: :last do
       item :administrators, icon: 'fa fa-star', label: t('trestle.labels.administrators')
     end
   end

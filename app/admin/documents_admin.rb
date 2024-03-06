@@ -2,7 +2,9 @@
 
 Trestle.resource(:documents) do
   menu do
-    item :documents, icon: 'fa fa-file', label: t('trestle.labels.documents')
+    group t('trestle.groups.resources') do
+      item :documents, icon: 'fa fa-file', label: t('trestle.labels.documents')
+    end
   end
 
   table do

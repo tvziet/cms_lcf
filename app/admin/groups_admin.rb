@@ -2,7 +2,9 @@
 
 Trestle.resource(:groups) do
   menu do
-    item :groups, icon: 'fa fa-briefcase', label: t('trestle.labels.groups')
+    group t('trestle.groups.resources') do
+      item :groups, icon: 'fa fa-briefcase', label: t('trestle.labels.groups')
+    end
   end
 
   collection do
@@ -23,15 +25,26 @@ Trestle.resource(:groups) do
     actions
   end
 
-  form do
+  form do |group|
     text_field :name
 
     row do
       col(sm: 12) { collection_select :company_id, Company.all, :id, :name }
     end
+
+    if group.persisted?
+      # Assign employees to group's company
+      employees = group.employees.presence || []
+      group.company.employees = employees
+
+      row do
+        employees = employees.presence || Employee.all
+        col(sm: 12) { collection_select :employee_ids, employees, :id, :full_name, {}, { multiple: true } }
+      end
+    end
   end
 
   params do |params|
-    params.require(:group).permit(:name, :company_id)
+    params.require(:group).permit(:name, :company_id, employee_ids: [])
   end
 end

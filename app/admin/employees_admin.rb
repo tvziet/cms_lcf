@@ -2,7 +2,9 @@
 
 Trestle.resource(:employees) do
   menu do
-    item :employees, icon: 'fas fa-users', label: t('trestle.labels.employees')
+    group t('trestle.groups.resources') do
+      item :employees, icon: 'fas fa-users', label: t('trestle.labels.employees')
+    end
   end
 
   # Ignore the password parameters if they are blank
@@ -11,29 +13,6 @@ Trestle.resource(:employees) do
     instance.assign_attributes(attrs)
   end
 
-  controller do
-    def groups_for_company
-      company = Company.find_by(id: params[:company_id])
-      groups = company&.groups
-
-      render json: groups.map { |group| { id: group.id, name: group.name } }
-    end
-
-    def companies
-      companies = Company.all
-      render json: companies.map { |company| { id: company.id, name: company.name } }
-    end
-
-    def groups
-      groups = Company.first.groups
-      render json: groups.map { |group| { id: group.id, name: group.name } }
-    end
-
-    def delete
-      CompanyEmployee.find_by(id: params[:company_id]).destroy
-      GroupEmployee.find_by(id: params[:id]).destroy
-    end
-  end
   table do
     column :id
     column :email
@@ -96,43 +75,9 @@ Trestle.resource(:employees) do
       end
 
       row do
-        col(sm: 4) do
-          link_to t('links.add_companies_and_groups'), '#', id: 'add_company_and_group'
-        end
-      end
-
-      row do
-        col(sm: 5) do
-          content_tag(:div, id: 'companies') do
-            fields_for :company_employees, employee.company_employees || employee.build_company_employees do |company_employee|
-              company_employee.select :company_id, Company.all.map { |company| [company.name, company.id] },
-                                      selected: company_employee.object.company_id, label: t('trestle.labels.companies')
-            end
-          end
-        end
-
-        col(sm: 5) do
-          content_tag :div, id: 'groups' do
-            fields_for :group_employees, employee.group_employees || employee.build_group_employees do |group_employee|
-              selected_company_id = Group.find(group_employee.object.group_id)&.company_id
-              group_employee.select :group_id, Group.where(company_id: selected_company_id).map { |group| [group.name, group.id] },
-                                    selected: group_employee.object.group_id, label: t('trestle.labels.groups')
-            end
-          end
-        end
-        col(sm: 2) do
-          content_tag :div, id: 'groups' do
-            (employee.group_employees || employee.build_group_employees).each_with_index do |group_employee, index|
-              selected_company_id = Group.find(group_employee.group_id)&.company_id
-              fields_for :group_employees, group_employee do |ge|
-                ge.select :group_id, Group.where(company_id: selected_company_id).map { |group| [group.name, group.id] },
-                          selected: group_employee.group_id, label: t('trestle.labels.groups')
-
-                company_employee = employee.company_employees.find_by(company_id: selected_company_id)
-                link_to 'Delete', '#', class: 'delete-button', id: group_employee.id, data: { company_id: company_employee&.id, index: index }
-              end
-            end
-          end
+        if employee.persisted?
+          col(sm: 6) { content_tag(:strong, 'Phòng ban') }
+          col(sm: 6) { employee.groups.includes(:company).map { |group| group&.business_name }.join(', ') }
         end
       end
     end
@@ -163,16 +108,5 @@ Trestle.resource(:employees) do
                                      :working_status, :job_title, :info_contract,
                                      company_employees_attributes: %i[id company_id],
                                      group_employees_attributes: %i[id group_id])
-  end
-
-  routes do
-    collection do
-      get :groups_for_company
-      get :companies
-      get :groups
-    end
-    member do
-      delete :delete
-    end
   end
 end
