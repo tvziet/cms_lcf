@@ -1,6 +1,21 @@
 $(document).on('turbolinks:load', function () {
-  $('#document_group_ids').closest('.row').hide();
-  $('#document_group_id').closest('.row').hide();
+  text = $('#select2-document_document_level_id-container').text()
+
+  if (text == 'Tài liệu cấp 1') {
+    $('#document_group_ids').empty().closest('.row').hide();
+    $('#document_group_id').empty().closest('.row').hide();
+  } else if (text == 'Tài liệu cấp 2') {
+    $('#document_company_id').empty().closest('.row').hide();
+    $('#document_group_id').empty().closest('.row').hide();
+  } else if (text == 'Tài liệu cấp 3') {
+    $('#document_company_id').empty().closest('.row').hide();
+    $('#document_group_ids').empty().closest('.row').hide();
+  }
+  else if (text == 'Tài liệu cấp 4') {
+    $('#document_company_id').empty().closest('.row').hide();
+    $('#document_group_ids').empty().closest('.row').hide();
+    $('#document_group_id').empty().closest('.row').hide();
+  }
 
   $('#document_document_level_id').change(function () {
     var documentLevelId = $(this).val();
