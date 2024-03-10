@@ -34,6 +34,8 @@ gem 'carrierwave', '~> 2.2', '>= 2.2.3'
 gem 'carrierwave-i18n', '< 3'
 gem 'image_processing', '~> 1.12', '>= 1.12.2'
 
+gem 'friendly_id', '~> 5.5', '>= 5.5.1'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
@@ -56,9 +58,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
-
-  # Add support for debugging
-  gem 'pry', '~> 0.14.2'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

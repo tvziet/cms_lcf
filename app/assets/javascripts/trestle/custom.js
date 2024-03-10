@@ -76,6 +76,7 @@ $(document).on('turbolinks:load', function () {
       });
     }
     else if (documentLevelId == '4') {
+      console.log(documentLevelId);
       $('#document_company_id').empty().closest('.row').hide();
       $('#document_group_ids').empty().closest('.row').hide();
       $('#document_group_id').empty().closest('.row').hide();

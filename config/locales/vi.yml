@@ -34,6 +34,7 @@ vi:
         created_at: 'Được tạo lúc'
         document_level_id: 'Cấp tài liệu'
         group_id: 'Phòng ban'
+        group_ids: 'Liên phòng ban'
         title: 'Tiêu đề'
         updated_at: 'Được cập nhật lúc'
       document_level:
@@ -91,6 +92,7 @@ vi:
   trestle:
     forms:
       groups: 'Liên phòng ban'
+      employees: 'Nhân viên'
     groups:
       configuration: 'Cấu hình'
       resources: 'Tài nguyên'
@@ -100,6 +102,7 @@ vi:
       num_of_employees: 'Số lượng nhân viên'
     tabs:
       contract_info: 'Thông tin hợp đồng'
+      documents_info: 'Thông tin tài liệu'
       general_info: 'Thông tin chung'
       groups_and_employees_info: 'Thông tin phòng ban và nhân viên'
       personal_info: 'Thông tin cá nhân'
@@ -112,6 +115,7 @@ vi:
       documents: 'Tài liệu'
       employees: 'Nhân viên'
       groups: 'Phòng ban'
+    successfully_updated: 'cap nhat thanh cong'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"

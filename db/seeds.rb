@@ -31,18 +31,24 @@ Company.delete_all
 company_1 = Company.create(name: 'LC Foods')
 company_2 = Company.create(name: 'KMS Vina')
 
-Group.create(name: 'Nhân sự', company_id: company_1.id)
-Group.create(name: 'IT', company_id: company_2.id)
+group_1 = Group.create(name: 'Nhân sự', company_id: company_1.id)
+group_2 = Group.create(name: 'IT', company_id: company_2.id)
 puts '... Khởi tạo thành công dữ liệu cho công ty và phòng ban ...'
 
 puts '======================================================='
 
-puts '... Bắt đầu khởi tạo dữ liệu cho cấp tài liệu ...'
+puts '... Bắt đầu khởi tạo dữ liệu cho cấp tài liệu và tài liệu ...'
+Document.delete_all
 DocumentLevel.delete_all
-DocumentLevel.create(id: 1, name: 'Tài liệu cấp 1')
-DocumentLevel.create(id: 2, name: 'Tài liệu cấp 2')
-DocumentLevel.create(id: 3, name: 'Tài liệu cấp 3')
-DocumentLevel.create(id: 4, name: 'Tài liệu cấp 4')
-puts '... Khởi tạo thành công dữ liệu cho cấp tài liệu ...'
+lv1 = DocumentLevel.create(id: 1, name: 'Tài liệu cấp 1')
+lv2 = DocumentLevel.create(id: 2, name: 'Tài liệu cấp 2')
+lv3 = DocumentLevel.create(id: 3, name: 'Tài liệu cấp 3')
+lv4 = DocumentLevel.create(id: 4, name: 'Tài liệu cấp 4')
+
+Document.create(title: 'Tài liệu cấp 1 - 1', body: 'Tài liệu cấp 1 - 1', document_level_id: lv1.id, company_id: company_1.id)
+Document.create(title: 'Tài liệu cấp 2 - 2', body: 'Tài liệu cấp 2 - 2', document_level_id: lv2.id, group_ids: [group_1.id, group_2.id])
+Document.create(title: 'Tài liệu cấp 3 - 3', body: 'Tài liệu cấp 3 - 3', document_level_id: lv3.id, group_id: group_1.id)
+Document.create(title: 'Tài liệu cấp 4 - 4', body: 'Tài liệu cấp 4 - 4', document_level_id: lv4.id, company_id: nil, group_id: nil, group_ids: [])
+puts '... Khởi tạo thành công dữ liệu cho cấp tài liệu và tài liệu ...'
 
 puts '======================================================='

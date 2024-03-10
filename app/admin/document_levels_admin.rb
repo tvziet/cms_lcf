@@ -7,6 +7,12 @@ Trestle.resource(:document_levels) do
     end
   end
 
+  to_param(&:slug)
+
+  instance do |params|
+    model.friendly.find(params[:id])
+  end
+
   table do
     column :name
 
@@ -24,8 +30,18 @@ Trestle.resource(:document_levels) do
     actions
   end
 
-  form do
-    text_field :name
+  form do |document_level|
+    tab :general_info, label: t('trestle.tabs.general_info') do
+      row do
+        col(sm: 12) { text_field :name }
+      end
+    end
+
+    tab :documents_info, label: t('trestle.tabs.documents_info') do
+      table document_level.documents, admin: :documents do
+        column :title, link: true
+      end
+    end
   end
 
   params do |params|

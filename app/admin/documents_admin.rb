@@ -7,11 +7,53 @@ Trestle.resource(:documents) do
     end
   end
 
+  to_param(&:slug)
+
+  instance do |params|
+    model.friendly.find(params[:id])
+  end
+
+  collection do
+    model.includes(:group)
+  end
+
   table do
     column :title
+
+    column :company_id, align: :center do |document|
+      if document.company_id.present?
+        safe_join([
+                    content_tag(:strong, Company.find_by(id: document.company_id)&.name, class: 'text-muted hidden-xs')
+                  ], '<br />'.html_safe)
+      else
+        '-'
+      end
+    end
+
+    column :group_ids, align: :center do |document|
+      if document.group_ids.present?
+        safe_join([
+                    content_tag(:strong, document.inter_groups.map(&:name).compact.join(', '), class: 'text-muted hidden-xs')
+                  ], '<br />'.html_safe)
+      else
+        '-'
+      end
+    end
+
+    column :group_id, align: :center do |document|
+      if document.group_id.present?
+        safe_join([
+                    content_tag(:strong, document.group&.name, class: 'text-muted hidden-xs')
+                  ], '<br />'.html_safe)
+      else
+        '-'
+      end
+    end
+
     column :created_at, align: :center do |document|
       document.created_at.strftime('%d/%m/%Y')
     end
+
     column :updated_at, align: :center do |document|
       document.updated_at.strftime('%d/%m/%Y')
     end
@@ -28,15 +70,51 @@ Trestle.resource(:documents) do
       companies = Company.all
       render json: companies.map { |company| { id: company.id, name: company.name } }
     end
+
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    def update
+      document_level = DocumentLevel.find_by(id: params[:document][:document_level_id])
+      update_attributes = case document_level.slug
+                          when 'tai-lieu-cap-1'
+                            { group_ids: [], group_id: nil, company_id: params[:document][:company_id],
+                              document_level_id: params[:document][:document_level_id] }
+                          when 'tai-lieu-cap-2'
+                            { group_ids: params[:document][:group_ids], group_id: nil, company_id: nil,
+                              document_level_id: params[:document][:document_level_id] }
+                          when 'tai-lieu-cap-3'
+                            { group_ids: [], group_id: params[:document][:group_id], company_id: nil,
+                              document_level_id: params[:document][:document_level_id] }
+                          when 'tai-lieu-cap-4'
+                            { group_ids: [], group_id: nil, company_id: nil,
+                              document_level_id: params[:document][:document_level_id] }
+                          end
+      if instance.update(update_attributes)
+        flash[:message] = flash_message('update.success', title: 'Success!',
+                                                          message: 'The %<lowercase_model_name>s was successfully updated.')
+        redirect_to_return_location(:update, instance, default: admin.instance_path(instance))
+      else
+        flash.now[:error] =
+          flash_message('update.failure', title: 'Warning!',
+                                          message: 'Please correct the errors below.')
+        render 'show', status: :unprocessable_entity
+      end
+    end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
   end
 
-  form do
+  form do |document|
     row do
       col(sm: 12) { text_field :title }
     end
 
     row do
       col(sm: 12) { editor :body }
+    end
+
+    if document.persisted?
+      row do
+        col(sm: 12) { select :employee_ids, Employee.all, { label: t('trestle.forms.employees') }, multiple: true }
+      end
     end
 
     row do
@@ -57,7 +135,7 @@ Trestle.resource(:documents) do
   end
 
   params do |params|
-    params.require(:document).permit(:title, :body, :document_level_id)
+    params.require(:document).permit(:title, :body, :document_level_id, :company_id, :group_id, group_ids: [])
   end
 
   routes do
