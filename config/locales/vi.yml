@@ -3,10 +3,11 @@ vi:
     models:
       administrator: 'Quản trị viên'
       company: 'Công ty'
-      document: 'Tài liệu'
       document_level: 'Cấp tài liệu'
+      document: 'Tài liệu'
       employee: 'Nhân viên'
       group: 'Phòng ban'
+      news: 'Tin tức'
       role: 'Quyền'
     errors:
       models:
@@ -68,6 +69,16 @@ vi:
         employee_ids: 'Nhân viên'
         name: 'Tên'
         updated_at: 'Được cập nhật lúc'
+      news:
+        body: 'Nội dung'
+        company_id: 'Công ty'
+        created_at: 'Được tạo lúc'
+        group_ids: 'Phòng ban'
+        public: 'Công khai'
+        published_at: 'Ngày xuất bản'
+        status: 'Trạng thái'
+        title: 'Tiêu đề'
+        updated_at: 'Được cập nhật lúc'
       role:
         name: 'Tên'
         created_at: 'Được tạo lúc'
@@ -81,6 +92,11 @@ vi:
         working_statuses:
           inactive: 'Đã nghỉ'
           active: 'Đang làm'
+      news:
+        statuses:
+          draft: 'Nháp'
+          published: 'Đã xuất bản'
+          archived: 'Đã lưu trữ'
   errors:
     messages:
       required: "là bắt buộc."
@@ -120,7 +136,6 @@ vi:
       documents: 'Tài liệu'
       employees: 'Nhân viên'
       groups: 'Phòng ban'
-    successfully_updated: 'cap nhat thanh cong'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"

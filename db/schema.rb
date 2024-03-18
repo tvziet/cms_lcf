@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_17_211029) do
+ActiveRecord::Schema.define(version: 2024_03_18_143221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,18 @@ ActiveRecord::Schema.define(version: 2024_03_17_211029) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_groups_on_company_id"
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "status", default: 0
+    t.datetime "published_at"
+    t.boolean "public", default: false
+    t.integer "company_id"
+    t.text "group_ids", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|

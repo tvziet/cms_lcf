@@ -52,10 +52,6 @@ class Employee < ApplicationRecord
   enum gender: { female: 0, male: 1, unknown: 2 }
   enum working_status: { inactive: 0, active: 1 }
 
-  def has_avatar?
-    avatar.present?
-  end
-
   private
 
   def age
