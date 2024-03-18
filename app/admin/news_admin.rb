@@ -1,6 +1,8 @@
 Trestle.resource(:news) do
   menu do
-    item :news, icon: 'fa fa-newspaper-o'
+    group t('trestle.groups.resources') do
+      item :news, icon: 'fa fa-newspaper-o', label: t('trestle.labels.news')
+    end
   end
 
   table do

@@ -136,6 +136,7 @@ vi:
       documents: 'Tài liệu'
       employees: 'Nhân viên'
       groups: 'Phòng ban'
+      news: 'Tin tức'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"
