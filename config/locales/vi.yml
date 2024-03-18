@@ -24,6 +24,11 @@ vi:
         full_name: 'Họ và tên'
         password: 'Mật khẩu'
         role_ids: 'Quyền'
+      carousel:
+        active: 'Kích hoạt'
+        created_at: 'Được tạo lúc'
+        image: 'Hình ảnh'
+        updated_at: 'Được cập nhật lúc'
       company:
         created_at: 'Được tạo lúc'
         name: 'Tên'
