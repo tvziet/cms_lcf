@@ -7,7 +7,7 @@
 #  group_ids    :text             default([]), is an Array
 #  public       :boolean          default(FALSE)
 #  published_at :datetime
-#  status       :integer          default(0)
+#  status       :integer          default("draft")
 #  title        :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

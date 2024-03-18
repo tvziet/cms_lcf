@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
-puts '... Bắt đầu khởi tạo dữ liệu cho quản trị viên ...'
+puts '... Bắt đầu khởi tạo dữ liệu cho quyền và quản trị viên ...'
+Role.delete_all
+role_1 = Role.create(level: 0)
+role_2 = Role.create(level: 1)
+role_3 = Role.create(level: 2)
+
 Administrator.delete_all
-Administrator.create!(email: 'admin@example.com', password: '123123', full_name: 'Tạ Công Huân')
-puts '... Khởi tạo thành công dữ liệu cho quản trị viên ...'
+Administrator.create!(email: 'admin@example.com', password: '123123', full_name: 'Tạ Công Huân', role_id: role_3.id)
+puts '... Khởi tạo thành công dữ liệu cho quyền và quản trị viên ...'
 
 puts '======================================================='
 

@@ -15,8 +15,11 @@ Trestle.resource(:employees) do
 
   table do
     column :id
+
     column :email
+
     column :full_name
+
     column :avatar, align: :center do |employee|
       if employee.avatar?
         image_tag(employee.avatar.url, id: 'avatar', loading: 'lazy')
@@ -24,21 +27,35 @@ Trestle.resource(:employees) do
         image_tag('fallback/default.png', id: 'avatar', loading: 'lazy')
       end
     end
+
     column :age
+
     column :gender do |employee|
       employee.value(:genders, employee.gender)
     end
+
     column :address
+
     column :native_place
+
     column :tax_code
+
     column :social_insurance_number
+
     column :created_at, align: :center do |employee|
       employee.created_at.strftime('%d/%m/%Y')
     end
+
     column :updated_at, align: :center do |employee|
       employee.updated_at.strftime('%d/%m/%Y')
     end
-    actions
+
+    actions do |toolbar, _instance, admin|
+      if (admin&.actions&.include?(:edit) && current_administrator.high_level?) || current_administrator.medium_level?
+        toolbar.edit
+        toolbar.delete
+      end
+    end
   end
 
   form do |employee|

@@ -27,7 +27,13 @@ Trestle.resource(:document_levels) do
     column :updated_at, align: :center do |document_level|
       document_level.updated_at.strftime('%d/%m/%Y')
     end
-    actions
+
+    actions do |toolbar, _instance, admin|
+      if (admin&.actions&.include?(:edit) && current_administrator.high_level?) || current_administrator.medium_level?
+        toolbar.edit
+        toolbar.delete
+      end
+    end
   end
 
   form do |document_level|

@@ -7,15 +7,37 @@ Trestle.resource(:news) do
 
   table do
     column :title
-    column :body
+
+    column :body do |news|
+      news.body.html_safe
+    end
+
     column :company_id
+
     column :group_ids
+
     column :published_at, align: :center
+
     column :public
-    column :status
-    column :created_at, align: :center
-    column :updated_at, align: :center
-    actions
+
+    column :status do |news|
+      news.value(:statuses, news.status)
+    end
+
+    column :created_at, align: :center do |news|
+      news.created_at.strftime('%d/%m/%y')
+    end
+
+    column :updated_at, align: :center do |news|
+      news.updated_at.strftime('%d/%m/%y')
+    end
+
+    actions do |toolbar, _instance, admin|
+      if (admin&.actions&.include?(:edit) && current_administrator.high_level?) || current_administrator.medium_level?
+        toolbar.edit
+        toolbar.delete
+      end
+    end
   end
 
   form do
@@ -40,11 +62,13 @@ Trestle.resource(:news) do
     end
 
     row do
-      col(sm: 12) { select(:company_id, Company.all) }
+      col(sm: 12) do
+        collection_select(:company_id, Company.all, :id, :name)
+      end
     end
 
     row do
-      col(sm: 12) { select(:group_ids, Group.all) }
+      col(sm: 12) { select :group_ids, Group.all, { label: t('trestle.forms.groups') }, multiple: true }
     end
   end
 

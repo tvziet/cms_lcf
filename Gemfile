@@ -24,6 +24,7 @@ gem 'devise', '~> 4.9', '>= 4.9.3'
 # Admin
 gem 'trestle', '~> 0.9.8'
 gem 'trestle-auth', '~> 0.4.4'
+gem 'trestle-search', '~> 0.4.3'
 gem 'trestle-tinymce', '~> 0.3.1'
 
 # Internationalize

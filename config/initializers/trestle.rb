@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 Trestle.configure do |config|
   # == Customization Options
   #
@@ -24,7 +25,7 @@ Trestle.configure do |config|
   # Set the text shown in the page footer within the admin.
   # Defaults to 'Powered by Trestle'.
   #
-  config.footer = "#{Date.current.strftime('%d-%m-%Y')}"
+  config.footer = Date.current.strftime('%d-%m-%Y').to_s
 
   # Sets the default precision for timestamps (either :minutes or :seconds).
   # Defaults to :minutes.
@@ -267,3 +268,4 @@ Trestle.configure do |config|
   config.form_field :tinymce, Trestle::TinyMCE::Field
   config.form_field :editor, Trestle::TinyMCE::Field
 end
+# rubocop:enable Metrics/BlockLength

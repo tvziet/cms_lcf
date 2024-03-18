@@ -24,7 +24,7 @@ vi:
         avatar: 'Hình đại diện'
         full_name: 'Họ và tên'
         password: 'Mật khẩu'
-        role_ids: 'Quyền'
+        role_id: 'Quyền'
       carousel:
         active: 'Kích hoạt'
         created_at: 'Được tạo lúc'
@@ -80,7 +80,7 @@ vi:
         title: 'Tiêu đề'
         updated_at: 'Được cập nhật lúc'
       role:
-        name: 'Tên'
+        level: 'Cấp độ'
         created_at: 'Được tạo lúc'
         updated_at: 'Được cập nhật lúc'
     enums:
@@ -97,6 +97,11 @@ vi:
           draft: 'Nháp'
           published: 'Đã xuất bản'
           archived: 'Đã lưu trữ'
+      role:
+        level:
+          low: 'Thấp'
+          medium: 'Trung bình'
+          high: 'Cao'
   errors:
     messages:
       required: "là bắt buộc."
@@ -137,6 +142,7 @@ vi:
       employees: 'Nhân viên'
       groups: 'Phòng ban'
       news: 'Tin tức'
+      roles: 'Quyền'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"

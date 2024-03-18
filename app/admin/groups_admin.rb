@@ -13,16 +13,25 @@ Trestle.resource(:groups) do
 
   table do
     column :name
+
     column :company_id, align: :center do |group|
       group.company.name
     end
+
     column :created_at, align: :center do |group|
       group.created_at.strftime('%d/%m/%y')
     end
+
     column :updated_at, align: :center do |group|
       group.updated_at.strftime('%d/%m/%y')
     end
-    actions
+
+    actions do |toolbar, _instance, admin|
+      if (admin&.actions&.include?(:edit) && current_administrator.high_level?) || current_administrator.medium_level?
+        toolbar.edit
+        toolbar.delete
+      end
+    end
   end
 
   form do |group|

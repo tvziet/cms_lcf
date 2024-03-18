@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 Trestle.resource(:administrators, model: Administrator, scope: Auth) do
   menu do
     group t('trestle.groups.configuration'), priority: :last do
@@ -7,20 +8,28 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
     end
   end
 
+  collection do
+    model.includes(:role)
+  end
+
   table do
     column :id
 
-    column :avatar do |administrator|
+    column :avatar, align: :center do |administrator|
       avatar_for(administrator)
     end
 
-    column :email, link: true
+    column :email, link: true, align: :center
 
-    column :full_name
+    column :full_name, align: :center
+
+    column :role_id, align: :center do |administrator|
+      administrator.role.value(:level, administrator.role.level)
+    end
 
     actions do |a|
-      a.delete unless a.instance == current_user
-      a.edit if a.instance == current_user
+      a.edit if a.instance == current_user || current_user.high_level?
+      a.delete if current_user.high_level?
     end
   end
 
@@ -38,7 +47,7 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
     end
 
     tab :role_info, label: t('trestle.tabs.role_info') do
-
+      col(sm: 12) { collection_select(:role_id, Role.all, :id, ->(role) { role.value(:level, role.level) }) }
     end
   end
 
@@ -59,3 +68,4 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

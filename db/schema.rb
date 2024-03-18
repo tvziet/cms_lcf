@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_18_143221) do
+ActiveRecord::Schema.define(version: 2024_03_18_222312) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "administrators", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,8 +27,10 @@ ActiveRecord::Schema.define(version: 2024_03_18_143221) do
     t.string "full_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "role_id"
     t.index ["email"], name: "index_administrators_on_email", unique: true
     t.index ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_administrators_on_role_id"
   end
 
   create_table "carousels", force: :cascade do |t|
@@ -38,8 +42,12 @@ ActiveRecord::Schema.define(version: 2024_03_18_143221) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
+    t.string "logo"
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "companies_name_idx", opclass: :gin_trgm_ops, using: :gin
+    t.index ["slug"], name: "index_companies_on_slug", unique: true
   end
 
   create_table "company_employees", force: :cascade do |t|
@@ -99,12 +107,6 @@ ActiveRecord::Schema.define(version: 2024_03_18_143221) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
-  create_table "footers", force: :cascade do |t|
-    t.jsonb "options", default: {}
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -146,11 +148,12 @@ ActiveRecord::Schema.define(version: 2024_03_18_143221) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.integer "name", default: 0
+    t.integer "level", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "administrators", "roles"
   add_foreign_key "company_employees", "companies"
   add_foreign_key "company_employees", "employees"
   add_foreign_key "documents", "document_levels"
