@@ -58,7 +58,7 @@ Trestle.resource(:news) do
     end
 
     row(class: 'check-box-news') do
-      col(sm: 12) { check_box :public, data: { id: 'concac'} }
+      col(sm: 12) { check_box :public, data: { id: 'public_mode' } }
     end
 
     row do
