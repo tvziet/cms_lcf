@@ -57,13 +57,13 @@ Trestle.resource(:news) do
       col(sm: 12) { datetime_field :published_at }
     end
 
-    row do
-      col(sm: 12) { check_box :public }
+    row(class: 'check-box-news') do
+      col(sm: 12) { check_box :public, data: { id: 'concac'} }
     end
 
     row do
       col(sm: 12) do
-        collection_select(:company_id, Company.all, :id, :name)
+        collection_select(:company_id, Company.all, :id, :name, include_blank: true)
       end
     end
 

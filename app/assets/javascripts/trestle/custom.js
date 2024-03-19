@@ -82,4 +82,55 @@ $(document).on('turbolinks:load', function () {
       $('#document_group_id').empty().closest('.row').hide();
     }
   });
+
+  $('input[data-id="concac"]').change(function () {
+    if($(this).is(':checked')) {
+      $('#news_company_id').closest('.row').hide();
+      $('#news_group_ids').closest('.row').hide();
+    } else {
+      $('#news_company_id').closest('.row').show();
+      $('#news_group_ids').closest('.row').show();
+    }
+  });
+
+  if($('#company_id').val()) {
+    $('#check-box-news').hide();
+    $('#news_group_ids').closest('.row').hide();
+  } else {
+    $('#check-box-news').show();
+    $('#news_group_ids').closest('.row').show();
+  }
+
+  $('#news_company_id').change(function() {
+    if($(this).val()) {
+      $('.check-box-news').closest('.row').hide();
+      $('#news_group_ids').closest('.row').hide();
+    } else {
+      $('.check-box-news').closest('.row').show();
+      $('#news_group_ids').closest('.row').show();
+    }
+  });
+
+  if($('#group_ids').val()) {
+    $('#check-box-news').hide();
+    $('#news_group_id').closest('.row').hide();
+  } else {
+    $('#check-box-news').show();
+    $('#news_group_id').closest('.row').show();
+  }
+
+  $('#news_group_ids').change(function() {
+    if($(this).val()) {
+      $('.check-box-news').closest('.row').hide();
+      $('#news_group_id').closest('.row').hide();
+    }
+  });
+
+  $('#news_group_ids').on('select2:unselect', function(e) {
+    if($(this).val() == null || $(this).val().length == 0) {
+      console.log(123123);
+      $('.check-box-news').closest('.row').show();
+      $('#news_group_id').closest('.row').show();
+    }
+  });
 });
