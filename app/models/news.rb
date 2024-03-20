@@ -18,4 +18,14 @@ class News < ApplicationRecord
   include HumanizeValue
 
   enum status: { draft: 0, published: 1, archived: 2 }
+
+  validates :title, :body, :status, :published_at, presence: true
+
+  before_save :update_group_ids
+
+  private
+
+  def update_group_ids
+    self.group_ids = [] if group_ids == ['']
+  end
 end

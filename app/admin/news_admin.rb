@@ -12,16 +12,35 @@ Trestle.resource(:news) do
       news.body.html_safe
     end
 
-    column :company_id
+    column :company_id, align: :center do |news|
+      if news.company_id
+        safe_join([
+                    content_tag(:strong, Company.where(id: news.company_id).map(&:name)&.join(', '), class: 'text-muted hidden-xs')
+                  ], '<br />'.html_safe)
+      else
+        '-'
+      end
+    end
 
-    column :group_ids
+    column :group_ids, align: :center do |news|
+      if news.group_ids.present?
+        safe_join([
+                    content_tag(:strong, Group.where(id: news.group_ids).map(&:name)&.join(', '), class: 'text-muted hidden-xs')
+                  ], '<br />'.html_safe)
+      else
+        '-'
+      end
+    end
 
-    column :published_at, align: :center
+    column :published_at, align: :center do |news|
+      news.published_at.strftime('%d/%m/%y')
+    end
 
     column :public
 
-    column :status do |news|
-      news.value(:statuses, news.status)
+    column :status, sort: :status, align: :center do |news|
+      status_tag(news.value(:statuses, news.status),
+                 { 'Đã xuất bản' => :success, 'Nháp' => :danger }[news.value(:statuses, news.status)] || :default)
     end
 
     column :created_at, align: :center do |news|

@@ -83,7 +83,7 @@ $(document).on('turbolinks:load', function () {
     }
   });
 
-  $('input[data-id="concac"]').change(function () {
+  $('input[data-id="public_mode"]').change(function () {
     if ($(this).is(':checked')) {
       $('#news_company_id').closest('.row').hide();
       $('#news_group_ids').closest('.row').hide();
