@@ -49,7 +49,13 @@ Trestle.resource(:companies) do
 
   form do |company|
     tab :general_info, label: t('trestle.tabs.general_info') do
-      text_field :name
+      row do
+        col(sm: 12) { text_field :name }
+      end
+
+      row do
+        col(sm: 12) { file_field :logo }
+      end
     end
 
     tab :groups_and_employees_info, label: t('trestle.tabs.groups_and_employees_info') do
@@ -63,6 +69,6 @@ Trestle.resource(:companies) do
   end
 
   params do |params|
-    params.require(:company).permit(:name)
+    params.require(:company).permit(:name, :logo)
   end
 end

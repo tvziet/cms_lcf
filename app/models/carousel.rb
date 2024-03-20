@@ -10,5 +10,5 @@
 #
 class Carousel < ApplicationRecord
   mount_uploader :image, ImageUploader
-  validates :image, :active, presence: true
+  validates :image, presence: true
 end
