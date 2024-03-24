@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_24_065604) do
+ActiveRecord::Schema.define(version: 2024_03_24_070708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 2024_03_24_065604) do
     t.text "group_ids", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_news_on_slug", unique: true
   end
 
   create_table "roles", force: :cascade do |t|
