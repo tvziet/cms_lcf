@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_18_222312) do
+ActiveRecord::Schema.define(version: 2024_03_24_013527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2024_03_18_222312) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.index ["name"], name: "document_levels_name_idx", opclass: :gin_trgm_ops, using: :gin
     t.index ["slug"], name: "index_document_levels_on_slug", unique: true
   end
 

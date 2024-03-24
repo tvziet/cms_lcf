@@ -13,6 +13,10 @@ Trestle.resource(:document_levels) do
     model.friendly.find(params[:id])
   end
 
+  search do |query|
+    query ? collection.searchable(query) : collection
+  end
+
   table do
     column :name
 
