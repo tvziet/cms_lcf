@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:news) do
   menu do
     group t('trestle.groups.resources') do

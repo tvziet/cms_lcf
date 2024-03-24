@@ -54,7 +54,7 @@ Trestle.resource(:documents) do
     column :group_ids, align: :center do |document|
       if document.group_ids.present?
         safe_join([
-                    content_tag(:strong, document.inter_groups.map(&:name).compact.join(', '), class: 'text-muted hidden-xs')
+                    content_tag(:strong, document.inter_groups.filter_map(&:name).join(', '), class: 'text-muted hidden-xs')
                   ], '<br />'.html_safe)
       else
         '-'

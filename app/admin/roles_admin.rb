@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:roles) do
   menu do
     group t('trestle.groups.configuration'), priority: :last do

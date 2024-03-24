@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.resource(:carousels) do
   menu do
     group t('trestle.groups.configuration'), priority: :last do
