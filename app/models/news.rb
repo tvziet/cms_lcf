@@ -17,6 +17,7 @@
 # Indexes
 #
 #  index_news_on_slug  (slug) UNIQUE
+#  news_title_idx      (title) USING gin
 #
 class News < ApplicationRecord
   extend HumanizeValues
@@ -29,6 +30,14 @@ class News < ApplicationRecord
   validates :title, :body, :status, :published_at, presence: true
 
   before_save :update_group_ids
+
+  scope :filter_by_title, ->(title) { where('unaccent(news.title) ILIKE ?', "%#{title}%") }
+  scope :filter_by_company, -> { where.not(company_id: nil) }
+  scope :filter_by_groups, -> { where.not(group_ids: []) }
+
+  def self.searchable(query)
+    filter_by_title(query)
+  end
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?

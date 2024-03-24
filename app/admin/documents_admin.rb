@@ -25,17 +25,17 @@ Trestle.resource(:documents) do
     scope t('trestle.scopes.all'), lambda {
                                      Document.all
                                    }, label: t('trestle.scopes.all')
-    scope t('trestle.scopes.filter_by_company'), lambda {
+    scope t('trestle.scopes.documents.filter_by_company'), lambda {
       Document.filter_by_company
-    }, label: t('trestle.scopes.filter_by_company')
+    }, label: t('trestle.scopes.documents.filter_by_company')
 
-    scope t('trestle.scopes.filter_by_group'), lambda {
+    scope t('trestle.scopes.documents.filter_by_group'), lambda {
       Document.filter_by_group
-    }, label: t('trestle.scopes.filter_by_group')
+    }, label: t('trestle.scopes.documents.filter_by_group')
 
-    scope t('trestle.scopes.filter_by_groups'), lambda {
+    scope t('trestle.scopes.documents.filter_by_groups'), lambda {
       Document.filter_by_groups
-    }, label: t('trestle.scopes.filter_by_groups')
+    }, label: t('trestle.scopes.documents.filter_by_groups')
   end
 
   table do

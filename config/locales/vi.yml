@@ -145,9 +145,17 @@ vi:
       roles: 'Quyền'
     scopes:
       all: 'Tất cả'
-      filter_by_company: 'Tài liệu theo công ty'
-      filter_by_group: 'Tài liệu theo phòng ban'
-      filter_by_groups: 'Tài liệu liên phòng ban'
+      documents:
+        filter_by_company: 'Tài liệu theo công ty'
+        filter_by_group: 'Tài liệu theo phòng ban'
+        filter_by_groups: 'Tài liệu liên phòng ban'
+      news:
+        filter_by_company: 'Tin tức theo công ty'
+        filter_by_public: 'Tin tức công khai'
+        filter_by_groups: 'Tin tức liên phòng ban'
+        filter_by_draft: 'Tin tức nháp'
+        filter_by_published: 'Tin tức đã xuất bản'
+        filter_by_archived: 'Tin tức đã lưu trữ'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"

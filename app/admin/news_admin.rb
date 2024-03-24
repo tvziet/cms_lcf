@@ -11,6 +11,40 @@ Trestle.resource(:news) do
     model.friendly.find(params[:id])
   end
 
+  search do |query|
+    query ? collection.searchable(query) : collection
+  end
+
+  scopes do
+    scope t('trestle.scopes.all'), lambda {
+                                     News.all
+                                   }, label: t('trestle.scopes.all')
+
+    scope t('trestle.scopes.news.filter_by_public'), lambda {
+      News.where(public: true)
+    }, label: t('trestle.scopes.news.filter_by_public')
+
+    scope t('trestle.scopes.news.filter_by_company'), lambda {
+      News.filter_by_company
+    }, label: t('trestle.scopes.news.filter_by_company')
+
+    scope t('trestle.scopes.news.filter_by_groups'), lambda {
+      News.filter_by_groups
+    }, label: t('trestle.scopes.news.filter_by_groups')
+
+    scope t('trestle.scopes.news.filter_by_draft'), lambda {
+      News.draft
+    }, label: t('trestle.scopes.news.filter_by_draft')
+
+    scope t('trestle.scopes.news.filter_by_published'), lambda {
+      News.published
+    }, label: t('trestle.scopes.news.filter_by_published')
+
+    scope t('trestle.scopes.news.filter_by_archived'), lambda {
+      News.archived
+    }, label: t('trestle.scopes.news.filter_by_archived')
+  end
+
   table do
     column :title
 
