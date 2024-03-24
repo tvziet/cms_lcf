@@ -19,6 +19,7 @@
 #  remember_created_at     :datetime
 #  reset_password_sent_at  :datetime
 #  reset_password_token    :string
+#  slug                    :string
 #  social_insurance_number :string
 #  tax_code                :string
 #  working_status          :integer          default("active")
@@ -29,10 +30,14 @@
 #
 #  index_employees_on_email                 (email) UNIQUE
 #  index_employees_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_employees_on_slug                  (slug) UNIQUE
 #
 class Employee < ApplicationRecord
   extend HumanizeValues
+  extend FriendlyId
   include HumanizeValue
+
+  friendly_id :full_name, use: :slugged
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -51,6 +56,10 @@ class Employee < ApplicationRecord
 
   enum gender: { female: 0, male: 1, unknown: 2 }
   enum working_status: { inactive: 0, active: 1 }
+
+  def should_generate_new_friendly_id?
+    slug.blank? || full_name_changed?
+  end
 
   private
 

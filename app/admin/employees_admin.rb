@@ -7,6 +7,12 @@ Trestle.resource(:employees) do
     end
   end
 
+  to_param(&:slug)
+
+  instance do |params|
+    model.friendly.find(params[:id])
+  end
+
   # Ignore the password parameters if they are blank
   update_instance do |instance, attrs|
     attrs.delete(:password) if attrs[:password].blank?
@@ -112,8 +118,10 @@ Trestle.resource(:employees) do
       form_group :avatar, label: false do
         if employee.avatar?
           link_to image_tag(employee.avatar.url(:thumb)), employee.avatar_url, data: { behavior: 'zoom' }
-        else
-          image_tag('fallback/default.png', id: 'employee_default_avatar', loading: 'lazy')
+        elsif employee.male?
+          image_tag('fallback/default_male.png', data: { behavior: 'zoom' })
+        elsif employee.female?
+          image_tag('fallback/default_female.png', data: { behavior: 'zoom' })
         end
       end
     end

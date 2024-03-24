@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_24_073059) do
+ActiveRecord::Schema.define(version: 2024_03_24_074148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -107,8 +107,10 @@ ActiveRecord::Schema.define(version: 2024_03_24_073059) do
     t.string "job_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_employees_on_slug", unique: true
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
