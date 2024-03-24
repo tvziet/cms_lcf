@@ -35,10 +35,15 @@ gem 'carrierwave', '~> 2.2', '>= 2.2.3'
 gem 'carrierwave-i18n', '< 3'
 gem 'image_processing', '~> 1.12', '>= 1.12.2'
 
+# URL friendly
 gem 'friendly_id', '~> 5.5', '>= 5.5.1'
+
+# For pagination
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'faker', '~> 3.2', '>= 3.2.3'
 end
 
 group :development do

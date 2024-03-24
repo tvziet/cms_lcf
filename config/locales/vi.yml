@@ -143,8 +143,18 @@ vi:
       groups: 'Phòng ban'
       news: 'Tin tức'
       roles: 'Quyền'
+    scopes:
+      all: 'Tất cả'
+      filter_by_company: 'Tài liệu theo công ty'
+      filter_by_group: 'Tài liệu theo phòng ban'
+      filter_by_groups: 'Tài liệu liên phòng ban'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"
+    placeholders:
+      search: 'Tìm kiếm...'
   links:
     add_companies_and_groups: 'Thêm công ty và phòng ban'
+  views:
+    pagination:
+      truncate: '&hellip;'

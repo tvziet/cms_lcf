@@ -14,7 +14,28 @@ Trestle.resource(:documents) do
   end
 
   collection do
-    model.includes(:group)
+    params[:q].present? || (params[:scope].present? && params[:scope] != 'Tất cả') ? model : model.includes(:group)
+  end
+
+  search do |query|
+    query ? collection.searchable(query) : collection
+  end
+
+  scopes do
+    scope t('trestle.scopes.all'), lambda {
+                                     Document.all
+                                   }, label: t('trestle.scopes.all')
+    scope t('trestle.scopes.filter_by_company'), lambda {
+      Document.filter_by_company
+    }, label: t('trestle.scopes.filter_by_company')
+
+    scope t('trestle.scopes.filter_by_group'), lambda {
+      Document.filter_by_group
+    }, label: t('trestle.scopes.filter_by_group')
+
+    scope t('trestle.scopes.filter_by_groups'), lambda {
+      Document.filter_by_groups
+    }, label: t('trestle.scopes.filter_by_groups')
   end
 
   table do
