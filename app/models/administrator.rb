@@ -12,6 +12,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  slug                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  role_id                :bigint
@@ -21,6 +22,7 @@
 #  index_administrators_on_email                 (email) UNIQUE
 #  index_administrators_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_administrators_on_role_id               (role_id)
+#  index_administrators_on_slug                  (slug) UNIQUE
 #
 # Foreign Keys
 #
@@ -28,7 +30,10 @@
 #
 class Administrator < ApplicationRecord
   extend HumanizeValues
+  extend FriendlyId
   include HumanizeValue
+
+  friendly_id :full_name, use: :slugged
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -49,5 +54,9 @@ class Administrator < ApplicationRecord
 
   def low_level?
     role.level == 'low'
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || full_name_changed?
   end
 end

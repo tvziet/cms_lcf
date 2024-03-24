@@ -12,6 +12,12 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
     model.includes(:role)
   end
 
+  to_param(&:slug)
+
+  instance do |params|
+    model.friendly.find(params[:id])
+  end
+
   table do
     column :id
 
