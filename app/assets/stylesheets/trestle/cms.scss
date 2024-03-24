@@ -13,8 +13,27 @@
 
 #companies,
 #groups {
+
   .form-group,
   .select2 {
     margin-bottom: 10px;
   }
+}
+
+.app-sidebar-header,
+.theme-bg-dark {
+  background-color: #da5652;
+}
+
+.login-form {
+  .form-group:last-child {
+    .btn-primary {
+      background-color: #e6423c;
+      border: 1px solid #e6423c;
+    }
+  }
+}
+
+.app-nav .active a {
+  border-color: #da5652;
 }
