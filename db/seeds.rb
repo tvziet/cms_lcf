@@ -18,15 +18,18 @@ puts '... Bắt đầu khởi tạo dữ liệu cho nhân viên ...'
 CompanyEmployee.delete_all
 GroupEmployee.delete_all
 Employee.delete_all
-Employee.create!(email: 'user1@example.com', password: '123123', full_name: 'User 1',
-                 dob: '20/06/1995'.to_date, gender: 1,
-                 address: '119/29/6 Khu phố 2, Tổ 84, Đường TMT13, Phường Trung Mỹ Tây, Quận 12',
-                 native_place: 'Xóm 6, Thôn Hiếu An, Xã Nhơn Khánh, Thị Xã An Nhơn, Tỉnh Bình Định',
-                 tax_code: '123123123',
-                 social_insurance_number: '345345345',
-                 info_contract: 1,
-                 working_status: 1,
-                 job_title: 'Nhân viên kế toán')
+6.times do |time|
+  Employee.create!(email: "user#{time}@example.com", password: '123123', full_name: Faker::Name.name,
+                  dob: Faker::Date.birthday(min_age: 18, max_age: 65).strftime('%m-%d-%Y'),
+                  gender: time.odd? ? 1 : 0,
+                  address: Faker::Address.full_address,
+                  native_place: Faker::Address.full_address,
+                  tax_code: Faker::Company.polish_taxpayer_identification_number,
+                  social_insurance_number: Faker::Company.polish_taxpayer_identification_number,
+                  info_contract: 1,
+                  working_status: 1,
+                  job_title: 'Nhân viên kế toán')
+end
 puts '... Khởi tạo thành công dữ liệu cho nhân viên ...'
 puts '======================================================='
 
@@ -39,6 +42,16 @@ company_2 = Company.create(name: 'KMS Vina')
 
 group_1 = Group.create(name: 'Nhân sự', company_id: company_1.id)
 group_2 = Group.create(name: 'IT', company_id: company_2.id)
+
+Employee.find_each do |employee|
+  if employee.id.odd?
+    employee.update!(job_title: 'Nhân viên tuyển dụng')
+    group_1.employees << employee
+  else
+    employee.update!(job_title: 'Nhân viên lập trình')
+    group_2.employees << employee if employee.id.even?
+  end
+end
 puts '... Khởi tạo thành công dữ liệu cho công ty và phòng ban ...'
 
 puts '======================================================='

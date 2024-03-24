@@ -23,8 +23,10 @@ Trestle.resource(:employees) do
     column :avatar, align: :center do |employee|
       if employee.avatar?
         image_tag(employee.avatar.url, id: 'avatar', loading: 'lazy')
-      else
-        image_tag('fallback/default.png', id: 'avatar', loading: 'lazy')
+      elsif employee.male?
+        image_tag('fallback/default_male.png', id: 'avatar', loading: 'lazy')
+      elsif employee.female?
+        image_tag('fallback/default_female.png', id: 'avatar', loading: 'lazy')
       end
     end
 
@@ -81,7 +83,8 @@ Trestle.resource(:employees) do
       end
 
       row do
-        col(sm: 12) { file_field :avatar }
+        col(sm: 6) { file_field :avatar }
+        col(sm: 6) { date_field :dob }
       end
     end
 
