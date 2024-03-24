@@ -9,7 +9,7 @@ Trestle.resource(:roles) do
 
   table do
     column :level, align: :center do |role|
-      role.value(:level, role.level)
+      role.value(:levels, role.level)
     end
 
     column :created_at, align: :center do |role|

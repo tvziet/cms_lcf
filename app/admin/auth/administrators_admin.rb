@@ -30,7 +30,7 @@ Trestle.resource(:administrators, model: Administrator, scope: Auth) do
     column :full_name, align: :center
 
     column :role_id, align: :center do |administrator|
-      administrator.role.value(:level, administrator.role.level)
+      administrator.role.value(:levels, administrator.role.level)
     end
 
     actions do |a|
