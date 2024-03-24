@@ -11,11 +11,21 @@ Trestle.resource(:groups) do
     model.includes(:company)
   end
 
+  to_param(&:slug)
+
+  instance do |params|
+    model.friendly.find(params[:id])
+  end
+
   table do
     column :name
 
     column :company_id, align: :center do |group|
       group.company.name
+    end
+
+    column :num_of_employees, align: :center, header: I18n.t('trestle.headers.num_of_employees') do |group|
+      group&.num_of_employees
     end
 
     column :created_at, align: :center do |group|
