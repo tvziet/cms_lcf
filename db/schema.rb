@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_24_074148) do
+ActiveRecord::Schema.define(version: 2024_03_24_074655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2024_03_24_074148) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["full_name"], name: "employees_full_name_idx", opclass: :gin_trgm_ops, using: :gin
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_employees_on_slug", unique: true
   end

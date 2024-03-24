@@ -28,6 +28,7 @@
 #
 # Indexes
 #
+#  employees_full_name_idx                  (full_name) USING gin
 #  index_employees_on_email                 (email) UNIQUE
 #  index_employees_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_employees_on_slug                  (slug) UNIQUE
@@ -59,6 +60,12 @@ class Employee < ApplicationRecord
 
   def should_generate_new_friendly_id?
     slug.blank? || full_name_changed?
+  end
+
+  scope :filter_by_full_name, ->(full_name) { where('unaccent(employees.full_name) ILIKE ?', "%#{full_name}%") }
+
+  def self.searchable(query)
+    filter_by_full_name(query)
   end
 
   private

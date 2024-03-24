@@ -19,6 +19,36 @@ Trestle.resource(:employees) do
     instance.assign_attributes(attrs)
   end
 
+  search do |query|
+    query ? collection.searchable(query) : collection
+  end
+
+  scopes do
+    scope t('trestle.scopes.all'), lambda {
+                                     Employee.all
+                                   }, label: t('trestle.scopes.all')
+
+    scope t('trestle.scopes.employees.filter_by_male'), lambda {
+      Employee.male
+    }, label: t('trestle.scopes.employees.filter_by_male')
+
+    scope t('trestle.scopes.employees.filter_by_female'), lambda {
+      Employee.female
+    }, label: t('trestle.scopes.employees.filter_by_female')
+
+    scope t('trestle.scopes.employees.filter_by_unknown'), lambda {
+      Employee.unknown
+    }, label: t('trestle.scopes.employees.filter_by_unknown')
+
+    scope t('trestle.scopes.employees.filter_by_inactive'), lambda {
+      Employee.inactive
+    }, label: t('trestle.scopes.employees.filter_by_inactive')
+
+    scope t('trestle.scopes.employees.filter_by_active'), lambda {
+      Employee.active
+    }, label: t('trestle.scopes.employees.filter_by_active')
+  end
+
   table do
     column :id
 
@@ -37,6 +67,10 @@ Trestle.resource(:employees) do
     end
 
     column :age
+
+    column :dob, align: :center do |employee|
+      employee.dob&.strftime('%d/%m/%Y')
+    end
 
     column :gender do |employee|
       employee.value(:genders, employee.gender)

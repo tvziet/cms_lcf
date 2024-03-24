@@ -98,7 +98,7 @@ vi:
           published: 'Đã xuất bản'
           archived: 'Đã lưu trữ'
       role:
-        level:
+        levels:
           low: 'Thấp'
           medium: 'Trung bình'
           high: 'Cao'
@@ -156,6 +156,12 @@ vi:
         filter_by_draft: 'Tin tức nháp'
         filter_by_published: 'Tin tức đã xuất bản'
         filter_by_archived: 'Tin tức đã lưu trữ'
+      employees:
+        filter_by_male: 'Nhân viên nam'
+        filter_by_female: 'Nhân viên nữ'
+        filter_by_unknown: 'Nhân viên có giới tính không xác định'
+        filter_by_inactive: 'Nhân viên đã nghỉ'
+        filter_by_active: 'Nhân viên đang làm'
   admin:
     titles:
       edit: "Chỉnh sửa %{model_name}"
