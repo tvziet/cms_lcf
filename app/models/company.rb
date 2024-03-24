@@ -22,7 +22,7 @@ class Company < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  has_many :groups
+  has_many :groups, dependent: :destroy
 
   has_many :company_employees
   has_many :employees, through: :company_employees
