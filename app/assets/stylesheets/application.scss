@@ -1,0 +1,41 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.navbar-default {
+  background-color: #da5652;
+
+  .navbar-brand {
+    color: #fffafa;
+  }
+
+  .navbar-nav>li>a {
+    color: #fffafa;
+  }
+
+  .navbar-nav>li>a:hover {
+    color: #fffafa;
+  }
+
+  .navbar-form {
+    .btn-default {
+      background-color: #ce1b15;
+      border: 1px solid #ce1b15;
+      margin-left: 10px;
+      color: #fffafa;
+    }
+  }
+}
+
+.carousel-cms {
+  margin-bottom: 18px;
+}
+
+.sticky-footer {
+  margin-top: auto;
+}

@@ -20,6 +20,7 @@ gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
 
 # Authentication
 gem 'devise', '~> 4.9', '>= 4.9.3'
+gem 'devise-i18n', '~> 1.12'
 
 # Admin
 gem 'trestle', '~> 0.9.8'
@@ -40,6 +41,11 @@ gem 'friendly_id', '~> 5.5', '>= 5.5.1'
 
 # For pagination
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
+
+# For UI
+gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
+gem 'jquery-rails'
+gem 'sassc-rails', '>= 2.1.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
