@@ -1,0 +1,29 @@
+<div class="container">
+  <h2 class="text-center">Thông tin công việc</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Thông tin</th>
+        <th>Chi tiết</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>Công ty</td>
+          <td><%= current_employee.companies.map(&:name).join(', ') %></td>
+        </tr>
+        <tr>
+          <td>Phòng ban</td>
+          <td><%= current_employee.groups.map(&:name).join(', ') %></td>
+        </tr>
+        <tr>
+          <td>Trạng thái làm việc</td>
+          <td class="<%= current_employee.active? ? 'btn btn-success' : 'btn btn-danger' %>"><%= current_employee.value(:working_statuses, current_employee.working_status) %></td>
+        </tr>
+        <tr>
+          <td>Vị trí</td>
+          <td><strong><%= current_employee.job_title %></strong></td>
+        </tr>
+    </tbody>
+  </table>
+</div>

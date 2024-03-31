@@ -20,7 +20,6 @@ gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
 
 # Authentication
 gem 'devise', '~> 4.9', '>= 4.9.3'
-gem 'devise-i18n', '~> 1.12'
 
 # Admin
 gem 'trestle', '~> 0.9.8'

@@ -1,0 +1,57 @@
+<div class="container">
+  <h2 class="text-center">Thông tin cá nhân</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Thông tin</th>
+        <th>Chi tiết</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>Email</td>
+          <td><%= current_employee.email %></td>
+        </tr>
+        <tr>
+          <td>Họ và tên</td>
+          <td><%= current_employee.full_name %></td>
+        </tr>
+        <tr>
+          <td>Giới tính</td>
+          <td><%= current_employee.value(:genders, current_employee.gender) %></td>
+        </tr>
+        <tr>
+          <td>Địa chỉ</td>
+          <td><%= current_employee.address %></td>
+        </tr>
+        <tr>
+          <td>Quê quán</td>
+          <td><%= current_employee.native_place %></td>
+        </tr>
+        <tr>
+          <td>Mã số thuế</td>
+          <td><%= current_employee.tax_code %></td>
+        </tr>
+        <tr>
+          <td>Mã BHXH</td>
+          <td><%= current_employee.social_insurance_number %></td>
+        </tr>
+        <tr>
+          <td>Ngày, tháng, năm sinh</td>
+          <td><%= current_employee.dob.strftime('%d/%m/%Y') %></td>
+        </tr>
+        <tr>
+          <td>Ảnh đại diện</td>
+          <td>
+            <% if current_employee.avatar? %>
+                <%= link_to image_tag(current_employee.avatar.url(:thumb)), current_employee.avatar_url %>
+            <% elsif current_employee.male? %>
+                <%= image_tag 'fallback/default_male.png' %>
+            <% elsif current_employee.female? %>
+                <%= image_tag 'fallback/default_female.png' %>
+            <% end %>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</div>

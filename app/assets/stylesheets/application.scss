@@ -32,10 +32,34 @@ body {
   }
 }
 
+h2 {
+  text-align: center;
+}
+
 .carousel-cms {
   margin-bottom: 18px;
 }
 
 .sticky-footer {
   margin-top: auto;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+.btn-danger {
+  margin-bottom: 10px;
+}
+
+tr {
+  .btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  img {
+    height: 200px;
+    margin-left: -30px;
+  }
 }
