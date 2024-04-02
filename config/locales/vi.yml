@@ -174,3 +174,7 @@ vi:
   views:
     pagination:
       truncate: '&hellip;'
+      first: '&laquo; Trang đầu'
+      last: 'Trang cuối &raquo;'
+      previous: '&lsaquo; Trang trước'
+      next: 'Trang tiếp theo &rsaquo;'

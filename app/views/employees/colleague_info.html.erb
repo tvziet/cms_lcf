@@ -1,0 +1,24 @@
+<div class="container">
+  <h2 class="text-center">Thông tin đồng nghiệp</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Email</th>
+        <th>Họ và tên</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @colleagues.each_with_index do |colleague, colleague_index| %>
+        <tr>
+          <td><%= colleague_index %></td>
+          <td><%= colleague.email %></td>
+          <td><%= colleague.full_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="paginator">
+    <%= paginate(Kaminari.paginate_array(@colleagues).page(params[:page]).per(1)) %>
+  </div>
+</div>

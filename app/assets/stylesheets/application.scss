@@ -63,3 +63,21 @@ tr {
     margin-left: -30px;
   }
 }
+
+.paginator {
+  text-align: right;
+
+  .pagination {
+    a {
+      color: #da5652 !important;
+    }
+
+    .active {
+      a {
+        color: #fffafa !important;
+        background-color: #da5652;
+        border: 1px solid #da5652;
+      }
+    }
+  }
+}
