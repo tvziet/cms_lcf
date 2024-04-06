@@ -106,22 +106,26 @@ Trestle.resource(:documents) do
                             { group_ids: [], group_id: nil, company_id: params[:document][:company_id],
                               document_level_id: params[:document][:document_level_id],
                               title: params[:document][:title],
-                              body: params[:document][:body] }
+                              body: params[:document][:body],
+                              files: params[:document][:files] }
                           when 'tai-lieu-cap-2'
                             { group_ids: params[:document][:group_ids], group_id: nil, company_id: nil,
                               document_level_id: params[:document][:document_level_id],
                               title: params[:document][:title],
-                              body: params[:document][:body] }
+                              body: params[:document][:body],
+                              files: params[:document][:files] }
                           when 'tai-lieu-cap-3'
                             { group_ids: [], group_id: params[:document][:group_id], company_id: nil,
                               document_level_id: params[:document][:document_level_id],
                               title: params[:document][:title],
-                              body: params[:document][:body] }
+                              body: params[:document][:body],
+                              files: params[:document][:files] }
                           when 'tai-lieu-cap-4'
                             { group_ids: [], group_id: nil, company_id: nil,
                               document_level_id: params[:document][:document_level_id],
                               title: params[:document][:title],
-                              body: params[:document][:body] }
+                              body: params[:document][:body],
+                              files: params[:document][:files] }
                           end
       if instance.update(update_attributes)
         flash[:message] = flash_message('update.success', title: 'Success!',
@@ -144,6 +148,10 @@ Trestle.resource(:documents) do
 
     row do
       col(sm: 12) { editor :body }
+    end
+
+    row do
+      col(sm: 12) { file_field :files, multiple: true }
     end
 
     if document.persisted?
@@ -170,7 +178,8 @@ Trestle.resource(:documents) do
   end
 
   params do |params|
-    params.require(:document).permit(:title, :body, :document_level_id, :company_id, :group_id, group_ids: [])
+    params.require(:document).permit(:title, :body, :document_level_id, :company_id, :group_id, { files: [] },
+                                     group_ids: [])
   end
 
   routes do

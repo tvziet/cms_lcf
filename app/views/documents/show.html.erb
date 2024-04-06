@@ -6,6 +6,15 @@
         <span class="label label-default">Ngày tạo: <%= @document.created_at.strftime("%d/%m/%Y") %></span>
         <div class="document-body">
           <p><%= @document.body.html_safe %></p>
+          <% @document.files.each do |file| %>
+          <% if %w(pdf).include?(file.url.split(".")&.last) %>
+            <%= link_to "Tệp đính kèm: #{file.file.filename}", pdfjs.full_path(file: "#{file.url}") %>
+          <% elsif %w(jpg jpeg png gif).include?(file.url.split(".")&.last) %>
+            <%= image_tag file.url, class: "no-document" %>
+          <% elsif %w(doc docx).include?(file.url.split(".")&.last)  %>
+            <%= link_to "Tải về: #{file.file.filename}", file.url%>
+          <% end %>
+        <% end %>
         </div>
       </div>
     </div>

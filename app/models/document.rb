@@ -7,6 +7,7 @@
 #  id                :bigint           not null, primary key
 #  body              :text
 #  employee_ids      :text             default([]), is an Array
+#  file              :string
 #  group_ids         :text             default([]), is an Array
 #  slug              :string
 #  title             :string
@@ -27,6 +28,8 @@
 #  fk_rails_...  (document_level_id => document_levels.id)
 #
 class Document < ApplicationRecord
+  mount_uploaders :files, FileUploader
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 

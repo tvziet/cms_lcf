@@ -32,4 +32,7 @@ Rails.application.routes.draw do
                sign_out: 'dang_xuat',
                edit: 'cap_nhat_thong_tin'
              }
+
+  # For render pdf files
+  mount PdfjsViewer::Rails::Engine => '/pdfjs', as: 'pdfjs'
 end

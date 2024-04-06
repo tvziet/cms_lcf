@@ -39,6 +39,7 @@ vi:
         company_id: 'Công ty'
         created_at: 'Được tạo lúc'
         document_level_id: 'Cấp tài liệu'
+        files: 'Tệp'
         group_id: 'Phòng ban'
         group_ids: 'Liên phòng ban'
         title: 'Tiêu đề'
