@@ -1,1 +1,30 @@
 <%= render 'shared/carousel' %>
+
+<div class="home-content">
+    <h4>&rarr; Tin tức gần đây &larr;</h4>
+    <div class="container">
+      <% if @news.present? %>
+        <% @news.each do |n| %>
+        <div class="row center-row">
+            <div class="col-md-12">
+              <h5><%= link_to n.title, chi_tiet_tin_tuc_path(id: n.id) %></h5>
+              <p><%= n.body.html_safe %></p>
+            </div>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+    <h4>&rarr; Tài liệu gần đây &larr;</h4>
+    <div class="container">
+      <% if @documents.present? %>
+        <% @documents.each do |document| %>
+        <div class="row center-row">
+            <div class="col-md-12">
+              <h5><%= link_to document.title, chi_tiet_tai_lieu_path(id: document.id) %></h5>
+              <p><%= document.body.html_safe %></p>
+            </div>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+</div>

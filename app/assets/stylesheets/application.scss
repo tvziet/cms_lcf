@@ -90,6 +90,16 @@ tr {
 
 .navbar-fixed-bottom {
   color: #fffafa;
+
+  ul {
+    list-style-type: none;
+
+    li {
+      a {
+        color: #fffafa !important;
+      }
+    }
+  }
 }
 
 .no-document,
@@ -101,7 +111,11 @@ tr {
 }
 
 .documents {
-  margin-bottom: 50px;
+  margin-bottom: 150px;
+}
+
+.home-content {
+  margin-bottom: 150px;
 }
 
 .document-body {
