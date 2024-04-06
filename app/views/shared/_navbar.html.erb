@@ -16,17 +16,15 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài liệu<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if employee_signed_in? %>
-              <li><a href="#">Tài liệu công ty</a></li>
+              <li><%= link_to 'Tài liệu công ty', tai_lieu_cong_ty_path %></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Tài liệu phòng ban</a></li>
+              <li><%= link_to 'Tài liệu phòng ban', tai_lieu_phong_ban_path %></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Tài liệu liên phòng ban</a></li>
+              <li><%= link_to 'Tài liệu của tôi', tai_lieu_cua_toi_path %></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Tài liệu của tôi</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Tài liệu công khai</a></li>
+              <li><%= link_to 'Tài liệu công khai', tai_lieu_cong_khai_path %></li>
             <% else %>
-              <li><a href="#">Tài liệu công khai</a></li>
+              <li><%= link_to 'Tài liệu công khai', tai_lieu_cong_khai_path %></li>
             <% end %>
             
           </ul>
@@ -46,7 +44,7 @@
           </ul>
         </li>
         <% if employee_signed_in? %>
-          <li><%= link_to 'Thông tin đồng nghiệp', employees_colleague_info_path %></li>
+          <li><%= link_to 'Thông tin đồng nghiệp', thong_tin_dong_nghiep_path %></li>
         <% end %>
       </ul>
       <form class="navbar-form navbar-left">
@@ -60,11 +58,11 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thông tin cá nhân<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to 'Thông tin cá nhân', employees_personal_info_path %></li>
+              <li><%= link_to 'Thông tin cá nhân', thong_tin_ca_nhan_path %></li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to 'Thông tin công việc', employees_work_info_path %></li>
+              <li><%= link_to 'Thông tin công việc', thong_tin_cong_viec_path %></li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to 'Thông tin hợp đồng', employees_contract_info_path %></li>
+              <li><%= link_to 'Thông tin hợp đồng', thong_tin_hop_dong_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to 'Cập nhật thông tin cá nhân', edit_employee_registration_path %>
               <% if employee_signed_in? %>

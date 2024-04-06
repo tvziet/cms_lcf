@@ -1,0 +1,16 @@
+<div class="container documents">
+  <% if @public_documents.present? %>
+    <% @public_documents.each do |public_document| %>
+      <div class="row">
+        <h5><%= link_to public_document.title, chi_tiet_tai_lieu_path(id: public_document.id) %></h5>
+        <p><%= public_document.body.html_safe %></p>
+      </div>
+    <% end %>
+    <div class="paginator">
+      <%= paginate @public_documents %>
+    </div>
+  <% else %>
+    <h4>Không có tài liệu nào</h4>
+    <%= image_tag('fallback/no_document.jpg', class: "no-document") %>
+  <% end %>
+</div>

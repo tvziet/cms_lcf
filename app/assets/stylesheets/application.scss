@@ -32,8 +32,14 @@ body {
   }
 }
 
-h2 {
+h2,
+h4 {
   text-align: center;
+  color: #da5652;
+}
+
+h5 {
+  color: #da5652;
 }
 
 .carousel-cms {
@@ -84,4 +90,30 @@ tr {
 
 .navbar-fixed-bottom {
   color: #fffafa;
+}
+
+.no-document {
+  width: 65%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.documents {
+  margin-bottom: 50px;
+}
+
+.document-body {
+  margin-top: 10px;
+}
+
+.center-row {
+  display: flex;
+  justify-content: center;
+}
+
+h5 {
+  a {
+    color: #da5652 !important;
+  }
 }

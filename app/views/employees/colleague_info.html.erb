@@ -18,7 +18,7 @@
       <% end %>
     </tbody>
   </table>
-  <div class="paginator">
-    <%= paginate(Kaminari.paginate_array(@colleagues).page(params[:page]).per(1)) %>
+  <div class="paginator documents">
+    <%= paginate(Kaminari.paginate_array(@colleagues).page(params[:page])) %>
   </div>
 </div>

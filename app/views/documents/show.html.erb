@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row center-row">
+      <div class="col-md-12">
+        <h5><%= @document.title %></h5>
+        <span class="label label-success"><%= @document.document_level.name %></span>
+        <span class="label label-default">Ngày tạo: <%= @document.created_at.strftime("%d/%m/%Y") %></span>
+        <div class="document-body">
+          <p><%= @document.body.html_safe %></p>
+        </div>
+      </div>
+    </div>
+</div>

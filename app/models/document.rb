@@ -41,6 +41,8 @@ class Document < ApplicationRecord
 
   validates :title, :body, presence: true
 
+  scope :public_documents, -> { where(document_level_id: 4) }
+
   def self.searchable(query)
     filter_by_title(query)
   end

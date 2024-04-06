@@ -1,0 +1,16 @@
+<div class="container documents">
+  <% if @combine_documents.present? %>
+    <% @combine_documents.each do |cpmbine_document| %>
+      <div class="row">
+        <h5><%= link_to cpmbine_document.title, chi_tiet_tai_lieu_path(id: cpmbine_document.id) %></h5>
+        <p><%= cpmbine_document.body.html_safe %></p>
+      </div>
+    <% end %>
+    <div class="paginator">
+      <%= paginate(Kaminari.paginate_array(@combine_documents).page(params[:page])) %>
+    </div>
+  <% else %>
+    <h4>Không có tài liệu nào</h4>
+    <%= image_tag('fallback/no_document.jpg', class: "no-document") %>
+  <% end %>
+</div>

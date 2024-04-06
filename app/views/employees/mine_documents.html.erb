@@ -1,0 +1,16 @@
+<div class="container documents">
+  <% if @mine_documents.present? %>
+    <% @mine_documents.each do |mine_document| %>
+      <div class="row">
+        <h5><%= link_to mine_document.title, chi_tiet_tai_lieu_path(id: mine_document.id) %></h5>
+        <p><%= mine_document.body.html_safe %></p>
+      </div>
+    <% end %>
+    <div class="paginator">
+      <%= paginate @mine_documents %>
+    </div>
+  <% else %>
+    <h4>Không có tài liệu nào</h4>
+    <%= image_tag('fallback/no_document.jpg', class: "no-document") %>
+  <% end %>
+</div>
