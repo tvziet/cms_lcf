@@ -12,6 +12,10 @@ body {
 
   .navbar-brand {
     color: #fffafa;
+
+    &:hover {
+      color: #fffafa;
+    }
   }
 
   .navbar-nav>li>a {
