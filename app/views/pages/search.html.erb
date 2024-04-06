@@ -13,7 +13,8 @@
           <% end %>
         </ul>
       <% else %>
-        <p>No results found.</p>
+        <p class="text-center">Không tìm thấy kết quả. Vui lòng thử lại bằng từ khoá khác.</p>
+        <%= image_tag('fallback/no_data.jpg', class: "no-document") %>
       <% end %>
     </div>
   </div>
