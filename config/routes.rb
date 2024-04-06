@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   root 'pages#home'
+  get '/tim_kiem', to: 'pages#search', as: 'tim_kiem'
 
   # For employee
   get 'thong_tin_cong_viec', to: 'employees#work_info'

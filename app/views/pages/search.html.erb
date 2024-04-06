@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h4>Kết quả tìm kiếm</h4>
+      <% if @results.present? %>
+        <ul class="list-group">
+          <% @results.each do |result| %>
+            <% if result.is_a?(Employee) %>
+              <li class="list-group-item"><%= result.full_name %></li>
+            <% else %>
+              <li class="list-group-item"><%= result.title %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No results found.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
