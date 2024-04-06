@@ -25,5 +25,11 @@ Rails.application.routes.draw do
 
   # For authentication
   devise_for :administrators
-  devise_for :employees
+  devise_for :employees,
+             path: '',
+             path_names: {
+               sign_in: 'dang_nhap',
+               sign_out: 'dang_xuat',
+               edit: 'cap_nhat_thong_tin'
+             }
 end
