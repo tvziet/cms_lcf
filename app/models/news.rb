@@ -7,7 +7,7 @@
 #  id           :bigint           not null, primary key
 #  body         :text
 #  group_ids    :text             default([]), is an Array
-#  public       :boolean          default(FALSE)
+#  is_public    :boolean          default(FALSE)
 #  published_at :datetime
 #  slug         :string
 #  status       :integer          default("draft")
@@ -36,6 +36,7 @@ class News < ApplicationRecord
   scope :filter_by_title, ->(title) { where('unaccent(news.title) ILIKE ?', "%#{title}%") }
   scope :filter_by_company, -> { where.not(company_id: nil) }
   scope :filter_by_groups, -> { where.not(group_ids: []) }
+  scope :public_news, -> { where(is_public: true) }
 
   def self.searchable(query)
     filter_by_title(query)

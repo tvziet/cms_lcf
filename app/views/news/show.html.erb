@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row center-row">
+      <div class="col-md-12">
+        <h5><%= @news.title %></h5>
+        <span class="label label-default">Ngày tạo: <%= @news.created_at.strftime("%d/%m/%Y") %></span>
+        <div class="document-body">
+          <p><%= @news.body.html_safe %></p>
+        </div>
+      </div>
+    </div>
+</div>

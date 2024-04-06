@@ -1,0 +1,16 @@
+<div class="container documents">
+  <% if @publicnews.present? %>
+    <% @public_news.each do |public_n| %>
+      <div class="row">
+        <h5><%= link_to public_n.title, chi_tiet_tai_lieu_path(id: public_n.id) %></h5>
+        <p><%= public_n.body.html_safe %></p>
+      </div>
+    <% end %>
+    <div class="paginator">
+      <%= paginate @public_news %>
+    </div>
+  <% else %>
+    <h4>Không có tin tức nào</h4>
+    <%= image_tag('fallback/no_news.png', class: "no-news") %>
+  <% end %>
+</div>

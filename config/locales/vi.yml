@@ -76,7 +76,7 @@ vi:
         company_id: 'Công ty'
         created_at: 'Được tạo lúc'
         group_ids: 'Phòng ban'
-        public: 'Công khai'
+        is_public: 'Công khai'
         published_at: 'Ngày xuất bản'
         status: 'Trạng thái'
         title: 'Tiêu đề'

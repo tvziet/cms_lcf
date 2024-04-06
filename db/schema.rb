@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_24_074655) do
+ActiveRecord::Schema.define(version: 2024_04_06_020345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 2024_03_24_074655) do
     t.text "body"
     t.integer "status", default: 0
     t.datetime "published_at"
-    t.boolean "public", default: false
+    t.boolean "is_public", default: false
     t.integer "company_id"
     t.text "group_ids", default: [], array: true
     t.datetime "created_at", null: false

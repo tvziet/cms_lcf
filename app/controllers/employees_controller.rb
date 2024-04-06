@@ -26,8 +26,7 @@ class EmployeesController < ApplicationController
 
   def group_documents
     group_ids = current_employee.group_ids
-    @group_documents = Docu
-    ment.where(group_id: group_ids).order(title: :asc)
+    @group_documents = Document.where(group_id: group_ids).order(title: :asc)
     @multi_group_documents = Document.where(group_ids: group_ids).order(title: :asc)
     @combine_documents = @group_documents + @multi_group_documents
     @combine_documents.sort_by(&:title)
@@ -36,5 +35,15 @@ class EmployeesController < ApplicationController
   def mine_documents
     @mine_documents = Document.where(employee_ids: [current_employee.id])
     @mine_documents.order(title: :asc).page(params[:page])
+  end
+
+  def company_news
+    company_ids = current_employee.company_ids
+    @company_news = News.where(company_id: company_ids).order(title: :asc).page(params[:page])
+  end
+
+  def group_news
+    group_ids = current_employee.group_ids
+    @group_news = News.where(group_ids: group_ids).order(title: :asc)
   end
 end

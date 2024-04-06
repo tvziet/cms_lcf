@@ -1,0 +1,16 @@
+<div class="container documents">
+  <% if @company_news.present? %>
+    <% @company_news.each do |company_n| %>
+      <div class="row">
+        <h5><%= link_to company_n.title, chi_tiet_tin_tuc_path(id: company_n.id) %></h5>
+        <p><%= company_n.body.html_safe %></p>
+      </div>
+    <% end %>
+    <div class="paginator">
+      <%= paginate @company_news %>
+    </div>
+  <% else %>
+    <h4>Không có tin tức nào</h4>
+    <%= image_tag('fallback/no_news.png', class: "no-news") %>
+  <% end %>
+</div>

@@ -23,7 +23,7 @@ Trestle.resource(:news) do
                                    }, label: t('trestle.scopes.all')
 
     scope t('trestle.scopes.news.filter_by_public'), lambda {
-      News.where(public: true)
+      News.where(is_public: true)
     }, label: t('trestle.scopes.news.filter_by_public')
 
     scope t('trestle.scopes.news.filter_by_company'), lambda {
@@ -78,7 +78,7 @@ Trestle.resource(:news) do
       news.published_at.strftime('%d/%m/%y')
     end
 
-    column :public
+    column :is_public
 
     column :status, sort: :status, align: :center do |news|
       status_tag(news.value(:statuses, news.status),
@@ -119,7 +119,7 @@ Trestle.resource(:news) do
     end
 
     row(class: 'check-box-news') do
-      col(sm: 12) { check_box :public, data: { id: 'public_mode' } }
+      col(sm: 12) { check_box :is_public, data: { id: 'public_mode' } }
     end
 
     row do
@@ -134,6 +134,6 @@ Trestle.resource(:news) do
   end
 
   params do |params|
-    params.require(:news).permit(:title, :body, :status, :published_at, :public, :company_id, group_ids: [])
+    params.require(:news).permit(:title, :body, :status, :published_at, :is_public, :company_id, group_ids: [])
   end
 end

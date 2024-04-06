@@ -33,13 +33,13 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin tức<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if employee_signed_in? %>
-              <li><a href="#">Tin tức của công ty</a></li>
+              <li><%= link_to 'Tin tức của công ty', tin_tuc_cong_ty_path %></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Tin tức của liên phòng ban</a></li>
+              <li><%= link_to 'Tin tức của phòng ban', tin_tuc_phong_ban_path %></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Tin tức công khai</a></li>
+              <li><%= link_to 'Tin tức công khai', tin_tuc_cong_khai_path %></li>
             <% else %>
-              <li><a href="#">Tin tức công khai</a></li>
+              <li><%= link_to 'Tin tức công khai', tin_tuc_cong_khai_path %></li>
             <% end %>
           </ul>
         </li>
