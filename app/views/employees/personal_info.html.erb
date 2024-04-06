@@ -41,6 +41,14 @@
           <td><%= current_employee.dob.strftime('%d/%m/%Y') %></td>
         </tr>
         <tr>
+          <td>Số điện thoại</td>
+          <td><%= current_employee.phone_number.present? ? current_employee.phone_number : '-' %></td>
+        </tr>
+        <tr>
+          <td>Số điện thoại người thân</td>
+          <td><%= current_employee.relative_phone_number.present? ? current_employee.relative_phone_number : '-' %></td>
+        </tr>
+        <tr>
           <td>Ảnh đại diện</td>
           <td>
             <% if current_employee.avatar? %>

@@ -16,6 +16,8 @@
 #  info_contract           :text
 #  job_title               :string
 #  native_place            :string
+#  phone_number            :string           default("")
+#  relative_phone_number   :string           default("")
 #  remember_created_at     :datetime
 #  reset_password_sent_at  :datetime
 #  reset_password_token    :string
@@ -30,6 +32,7 @@
 #
 #  employees_full_name_idx                  (full_name) USING gin
 #  index_employees_on_email                 (email) UNIQUE
+#  index_employees_on_full_name             (full_name) UNIQUE
 #  index_employees_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_employees_on_slug                  (slug) UNIQUE
 #
@@ -57,6 +60,8 @@ class Employee < ApplicationRecord
 
   enum gender: { female: 0, male: 1, unknown: 2 }
   enum working_status: { inactive: 0, active: 1 }
+
+  validates :full_name, uniqueness: true
 
   def should_generate_new_friendly_id?
     slug.blank? || full_name_changed?

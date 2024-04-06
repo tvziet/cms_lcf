@@ -84,6 +84,10 @@ Trestle.resource(:employees) do
 
     column :social_insurance_number
 
+    column :phone_number
+
+    column :relative_phone_number
+
     column :created_at, align: :center do |employee|
       employee.created_at.strftime('%d/%m/%Y')
     end
@@ -125,6 +129,11 @@ Trestle.resource(:employees) do
       row do
         col(sm: 6) { file_field :avatar }
         col(sm: 6) { date_field :dob }
+      end
+
+      row do
+        col(sm: 6) { text_field :phone_number }
+        col(sm: 6) { text_field :relative_phone_number }
       end
     end
 

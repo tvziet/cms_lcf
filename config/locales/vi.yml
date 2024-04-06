@@ -61,6 +61,8 @@ vi:
         native_place: 'Quê quán'
         password_confirmation: 'Mật khẩu xác nhận'
         password: 'Mật khẩu'
+        phone_number: 'Số điện thoại'
+        relative_phone_number: 'Số điện thoại người thân'
         social_insurance_number: 'Mã BHXH'
         tax_code: 'Mã số thuế'
         updated_at: 'Được cập nhật lúc'
