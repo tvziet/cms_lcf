@@ -104,16 +104,24 @@ Trestle.resource(:documents) do
       update_attributes = case document_level.slug
                           when 'tai-lieu-cap-1'
                             { group_ids: [], group_id: nil, company_id: params[:document][:company_id],
-                              document_level_id: params[:document][:document_level_id] }
+                              document_level_id: params[:document][:document_level_id],
+                              title: params[:document][:title],
+                              body: params[:document][:body] }
                           when 'tai-lieu-cap-2'
                             { group_ids: params[:document][:group_ids], group_id: nil, company_id: nil,
-                              document_level_id: params[:document][:document_level_id] }
+                              document_level_id: params[:document][:document_level_id],
+                              title: params[:document][:title],
+                              body: params[:document][:body] }
                           when 'tai-lieu-cap-3'
                             { group_ids: [], group_id: params[:document][:group_id], company_id: nil,
-                              document_level_id: params[:document][:document_level_id] }
+                              document_level_id: params[:document][:document_level_id],
+                              title: params[:document][:title],
+                              body: params[:document][:body] }
                           when 'tai-lieu-cap-4'
                             { group_ids: [], group_id: nil, company_id: nil,
-                              document_level_id: params[:document][:document_level_id] }
+                              document_level_id: params[:document][:document_level_id],
+                              title: params[:document][:title],
+                              body: params[:document][:body] }
                           end
       if instance.update(update_attributes)
         flash[:message] = flash_message('update.success', title: 'Success!',
