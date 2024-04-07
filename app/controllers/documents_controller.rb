@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DocumentsController < ApplicationController
+  skip_before_action :authenticate_employee!, only: [:public]
+
   def show
     @document = Document.find(params[:id])
   end
