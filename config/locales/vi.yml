@@ -24,6 +24,7 @@ vi:
         avatar: 'Hình đại diện'
         full_name: 'Họ và tên'
         password: 'Mật khẩu'
+        password_confirmation: 'Xác nhận mật khẩu'
         role_id: 'Quyền'
       carousel:
         active: 'Kích hoạt'
@@ -168,6 +169,17 @@ vi:
         filter_by_inactive: 'Nhân viên đã nghỉ'
         filter_by_active: 'Nhân viên đang làm'
   admin:
+    auth:
+      my_account: 'Tài khoản của tôi'
+      login: 'Đăng nhập'
+      logout: 'Đăng xuất'
+      error: 'Thông tin đăng nhập không hợp lệ!'
+      remember_me: 'Ghi nhớ phiên đăng nhập'
+    auth/account:
+      titles:
+        edit: 'Tài khoản của tôi'
+      breadcrumbs:
+        index: 'Tài khoản của tôi'
     titles:
       edit: "Chỉnh sửa %{model_name}"
     placeholders:
