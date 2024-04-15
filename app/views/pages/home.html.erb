@@ -8,7 +8,6 @@
         <div class="row center-row">
             <div class="col-md-12">
               <h5><%= link_to n.title, chi_tiet_tin_tuc_path(id: n.id) %></h5>
-              <p><%= n.body.html_safe %></p>
             </div>
         </div>
         <% end %>
@@ -21,7 +20,6 @@
         <div class="row center-row">
             <div class="col-md-12">
               <h5><%= link_to document.title, chi_tiet_tai_lieu_path(id: document.id) %></h5>
-              <p><%= document.body.html_safe %></p>
             </div>
         </div>
         <% end %>
