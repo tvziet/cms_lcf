@@ -69,6 +69,13 @@ vi:
         tax_code: 'Mã số thuế'
         updated_at: 'Được cập nhật lúc'
         working_status: 'Trạng thái làm việc'
+      footer:
+        company_address_info: 'Địa chỉ công ty'
+        company_email: 'Email công ty'
+        company_info: 'Thông tin công ty'
+        company_phone: 'SĐT công ty'
+        created_at: 'Được tạo lúc'
+        updated_at: 'Được cập nhật lúc'
       group:
         company_id: 'Công ty'
         created_at: 'Được tạo lúc'
