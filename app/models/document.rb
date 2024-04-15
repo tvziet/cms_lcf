@@ -7,7 +7,7 @@
 #  id                :bigint           not null, primary key
 #  body              :text
 #  employee_ids      :text             default([]), is an Array
-#  file              :string
+#  files             :json
 #  group_ids         :text             default([]), is an Array
 #  slug              :string
 #  title             :string
