@@ -1,0 +1,12 @@
+.git
+.gitignore
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/node_modules
+/public/assets
+.byebug_history
+.dockerignore
+Dockerfile
+docker-compose.yml
