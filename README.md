@@ -1,6 +1,9 @@
 # README
 
-## Setup
+## Description
+> Used to manage employees of multiple subsidiaries of a company. In addition, the main purpose is to manage digital documents in businesses.
+
+## Setup without Docker
 
 ```bash
 cp .env.example .env
@@ -18,4 +21,9 @@ rails db:migrate
 
 ```bash
 rails db:seed
+```
+
+## Setup with Docker
+```
+docker-compose up
 ```
